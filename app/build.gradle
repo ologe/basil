@@ -1,28 +1,102 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "dev.olog.basil"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
+            minifyEnabled true
+            useProguard true
+            multiDexEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+
+        debug {
             minifyEnabled false
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"
+//            debuggable false
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        preDexLibraries true
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xmaxerrs" << "500" // or whatever number you want
+        }
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$rootProject.lifecycle"
+
+//    support
+    implementation "androidx.core:core:1.0.1"
+    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.androidX"
+    implementation "com.google.android.material:material:$rootProject.androidX"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout"
+
+//    room
+    implementation "androidx.room:room-runtime:$rootProject.room"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.room"
+    implementation "androidx.room:room-rxjava2:$rootProject.room"
+
+//    dagger
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+
+    // rx
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android"
+//    implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rx_binding"
+//    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rootProject.rx_preferences"
+
+//    glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide"
+    annotationProcessor 'com.android.support:support-annotations:28.0.0'
+
+//    debug
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$rootProject.leak_canary"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leak_canary"
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+
+//    test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1-alpha01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1-alpha01'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
