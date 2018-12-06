@@ -1,7 +1,6 @@
 package dev.olog.basil.presentation.main;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +17,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
@@ -36,7 +34,7 @@ public class MainFragment extends BaseFragment {
     @Inject ViewModelProvider.Factory viewModelFactory;
     @Inject Navigator navigator;
 
-    private View header;
+    private View headerWrapper;
     private View arrow;
     private View recipeHeader;
     private RecyclerView list;
@@ -84,7 +82,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void findViews(View view){
-        header = view.findViewById(R.id.header);
+        headerWrapper = view.findViewById(R.id.headerWrapper);
         arrow = view.findViewById(R.id.arrow);
         list = view.findViewById(R.id.list);
         title = view.findViewById(R.id.title);
@@ -164,8 +162,8 @@ public class MainFragment extends BaseFragment {
 
         @Override
         public void onPanelSlide(View panel, float slideOffset) {
-            float translationY = (float) (header.getHeight() * slideOffset * 1.5);
-            header.setTranslationY(-translationY);
+            float translationY = (float) (headerWrapper.getHeight() * slideOffset * 1.5);
+            headerWrapper.setTranslationY(-translationY);
             arrow.setAlpha(MathUtils.clamp(1 - slideOffset * 3f, 0f, 1f));
 
             float alpha = slideOffset;

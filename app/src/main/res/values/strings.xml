@@ -5,4 +5,6 @@
     <string name="calories">Calories</string>
     <string name="people">People</string>
     <string name="fat">Fat</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Recipe, ingredients or tags</string>
 </resources>

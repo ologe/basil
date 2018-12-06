@@ -10,4 +10,5 @@
 
     <dimen name="panel_height">200dp</dimen>
 
+    <dimen name="wrapped_search_padding">8dp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package dev.olog.basil.presentation.main;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.inject.Inject;
 
@@ -15,9 +16,11 @@ import dev.olog.basil.presentation.model.DisplayableIngredient;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.model.DisplayableRecipeImage;
 import dev.olog.basil.utils.ListUtils;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.processors.BehaviorProcessor;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainFragmentViewModel extends ViewModel {
@@ -25,6 +28,7 @@ public class MainFragmentViewModel extends ViewModel {
     private final MutableLiveData<List<DisplayableRecipeImage>> recipeListLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<Integer> currentPositionPublisher = new MutableLiveData<>();
+    private final BehaviorProcessor<String> filterPublisher = BehaviorProcessor.createDefault("");
 
     private final CompositeDisposable subscriptions = new CompositeDisposable();
 
@@ -35,7 +39,13 @@ public class MainFragmentViewModel extends ViewModel {
 
         currentPositionPublisher.setValue(0);
 
-        Disposable disposable = recipeGateway.observeAll()
+        Disposable disposable = Flowable.combineLatest(
+                recipeGateway.observeAll(),
+                filterPublisher,
+                (recipes, query) -> ListUtils.filter(recipes, recipe -> recipe.getName().equalsIgnoreCase(query) ||
+                        ListUtils.find(recipe.getIngredients(), ingredient -> ingredient.getName().equalsIgnoreCase(query)) != null ||
+                        ListUtils.find(recipe.getIngredients(), ingredient -> ingredient.getName().equalsIgnoreCase(query)) != null
+                ))
                 .subscribeOn(Schedulers.io())
                 .map(recipes -> ListUtils.map(recipes, MainFragmentViewModel::toPresentationAsImage))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,6 +55,10 @@ public class MainFragmentViewModel extends ViewModel {
                 }, Throwable::printStackTrace);
 
         subscriptions.add(disposable);
+    }
+
+    public void updateFilter(String filter){
+        filterPublisher.onNext(filter);
     }
 
     public void updatePosition(int position){
@@ -63,6 +77,10 @@ public class MainFragmentViewModel extends ViewModel {
                         recipeGateway.observeById(id).map(MainFragmentViewModel::toPresentation)
                 );
             } catch (Throwable ex){
+                if (recipeListLiveData.getValue() != null && !recipeListLiveData.getValue().isEmpty()){
+                    currentPositionPublisher.setValue(0);
+                    return new MutableLiveData<>();
+                }
                 return new MutableLiveData<>();
             }
         });

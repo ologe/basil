@@ -6,6 +6,7 @@
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:textSize">80sp</item>
     </style>
 
 

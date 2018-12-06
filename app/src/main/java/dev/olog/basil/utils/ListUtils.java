@@ -23,6 +23,13 @@ public class ListUtils {
                 .blockingGet();
     }
 
+    public static <T> List<T> filter(List<T> input, Predicate<T> predicate){
+        return Observable.fromIterable(input)
+                .filter(predicate)
+                .toList()
+                .blockingGet();
+    }
+
     @Nullable
     @CheckResult
     public static <T> Optional<T> find(List<T> input, Predicate<T> predicate){

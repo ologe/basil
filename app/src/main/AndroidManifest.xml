@@ -13,7 +13,8 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:name=".app.App">
 
-        <activity android:name=".presentation.main.MainActivity">
+        <activity android:name=".presentation.main.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
