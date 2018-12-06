@@ -92,4 +92,13 @@ public class MainFragmentViewModel extends ViewModel {
         );
     }
 
+    public long getCurrentId() {
+        try {
+            Integer currentIndex = currentPositionPublisher.getValue();
+            List<DisplayableRecipeImage> recipes = recipeListLiveData.getValue();
+            return recipes.get(currentIndex).getId();
+        } catch (Exception ex){
+            return -1;
+        }
+    }
 }

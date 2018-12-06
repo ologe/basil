@@ -2,6 +2,7 @@ package dev.olog.basil.presentation.main;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
+import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.ScrimImageView;
 
 public class MainFragment extends BaseFragment {
@@ -27,6 +29,7 @@ public class MainFragment extends BaseFragment {
     public static final String TAG = MainFragment.class.getSimpleName();
 
     @Inject ViewModelProvider.Factory viewModelFactory;
+    @Inject Navigator navigator;
 
     private View header;
     private View arrow;
@@ -41,6 +44,7 @@ public class MainFragment extends BaseFragment {
     private View midWrapper;
     private View bottomWrapper;
     private View descriptionWrapper;
+    private View ingredients;
 
     private SlidingUpPanelLayout slidingPanel;
     private SlidingPanelListener panelListener;
@@ -88,6 +92,7 @@ public class MainFragment extends BaseFragment {
         midWrapper = view.findViewById(R.id.midWrapper);
         bottomWrapper = view.findViewById(R.id.bottomWrapper);
         descriptionWrapper = view.findViewById(R.id.descriptionWrapper);
+        ingredients = view.findViewById(R.id.ingredients);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
@@ -104,6 +109,7 @@ public class MainFragment extends BaseFragment {
         super.onResume();
         slidingPanel.addPanelSlideListener(panelListener);
         list.addOnScrollListener(onScrollListener);
+        ingredients.setOnClickListener(v -> navigator.toIngredientsFragment(viewModel.getCurrentId()));
     }
 
     @Override
@@ -111,6 +117,7 @@ public class MainFragment extends BaseFragment {
         super.onPause();
         slidingPanel.removePanelSlideListener(panelListener);
         list.removeOnScrollListener(onScrollListener);
+        ingredients.setOnClickListener(null);
     }
 
     private class OnScrollListener extends RecyclerView.OnScrollListener {
