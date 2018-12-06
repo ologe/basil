@@ -11,6 +11,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import dev.olog.basil.data.RecipeGateway;
 import dev.olog.basil.domain.entity.Recipe;
+import dev.olog.basil.presentation.model.DisplayableIngredient;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.model.DisplayableRecipeImage;
 import dev.olog.basil.utils.ListUtils;
@@ -67,6 +68,20 @@ public class MainFragmentViewModel extends ViewModel {
         });
     }
 
+    public LiveData<List<DisplayableIngredient>> observeCurrentIngredient(){
+        return Transformations.switchMap(currentPositionPublisher, index -> {
+            try {
+                long id = recipeListLiveData.getValue().get(index).getId();
+                return LiveDataReactiveStreams.fromPublisher(
+                        recipeGateway.observeById(id)
+                                .map(MainFragmentViewModel::toIngredients)
+                );
+            } catch (Throwable ex){
+                return new MutableLiveData<>();
+            }
+        });
+    }
+
     @Override
     protected void onCleared() {
         subscriptions.clear();
@@ -84,12 +99,18 @@ public class MainFragmentViewModel extends ViewModel {
                 recipe.getId(),
                 recipe.getName(),
                 recipe.getDescription(),
-                recipe.getPeople(),
-                recipe.getCalories(),
+                String.valueOf(recipe.getPeople()),
+                String.valueOf(recipe.getCalories()),
                 recipe.getIngredients(),
                 recipe.getImages(),
                 recipe.getTags()
         );
+    }
+
+    private static List<DisplayableIngredient> toIngredients(Recipe recipe){
+        return ListUtils.map(recipe.getIngredients(), ingredient -> new DisplayableIngredient(
+                ingredient.getName(), String.valueOf(ingredient.getQuantity()), ingredient.getOrder()
+        ));
     }
 
     public long getCurrentId() {

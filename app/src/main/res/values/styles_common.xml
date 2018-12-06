@@ -6,4 +6,11 @@
         <item name="android:background">@color/basil_green_500</item>
     </style>
 
+    <style name="Ingredient" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/lekton</item>
+        <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -7,8 +7,8 @@ data class DisplayableRecipe(
         val id: Long,
         val name: String,
         val description: String,
-        val people: Int,
-        val calories: Int,
+        val people: String,
+        val calories: String,
         val ingredients: MutableList<Ingredient>,
         val images: MutableList<String>,
         val tags: MutableList<Tag>

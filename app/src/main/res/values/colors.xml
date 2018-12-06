@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>ù
 
     <color name="background">#FFFBE6</color>
+    <color name="transparent_background">#EEFFFBE6</color>
 
     <color name="status_bar_color">#ECE9d5</color>
 

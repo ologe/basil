@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import androidx.appcompat.app.AppCompatActivity;
 import dev.olog.basil.R;
 import dev.olog.basil.dagger.scope.PerActivity;
-import dev.olog.basil.presentation.ingredients.IngredientsBottomSheetFragment;
+import dev.olog.basil.presentation.ingredients.IngredientsFragment;
 import dev.olog.basil.presentation.main.MainFragment;
 
 @PerActivity
@@ -26,7 +26,7 @@ public class Navigator {
     }
 
     public void toIngredientsFragment(long id){
-        IngredientsBottomSheetFragment.newInstance(id).show(activity.getSupportFragmentManager(), IngredientsBottomSheetFragment.TAG);
+        IngredientsFragment.newInstance(id).show(activity.getSupportFragmentManager(), IngredientsFragment.TAG);
     }
 
 }

@@ -99,8 +99,8 @@ public class MainFragment extends BaseFragment {
         if (recipe != null){
             title.setText(recipe.getName());
             description.setText(recipe.getDescription());
-            calories.setText(String.valueOf(recipe.getCalories()));
-            people.setText(String.valueOf(recipe.getPeople()));
+            calories.setText(recipe.getCalories());
+            people.setText(recipe.getPeople());
         }
     }
 
