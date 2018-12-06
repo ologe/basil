@@ -37,6 +37,10 @@ public class MainFragment extends BaseFragment {
     private TextView description;
     private TextView calories;
     private TextView people;
+    private View divider;
+    private View midWrapper;
+    private View bottomWrapper;
+    private View descriptionWrapper;
 
     private SlidingUpPanelLayout slidingPanel;
     private SlidingPanelListener panelListener;
@@ -62,7 +66,7 @@ public class MainFragment extends BaseFragment {
         snapHelper.attachToRecyclerView(list);
 
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
-        viewModel.observeRecipes().observe(getViewLifecycleOwner(), recipes -> adapter.updateDataSet(recipes));
+        viewModel.observeRecipes().observe(getViewLifecycleOwner(), adapter::updateDataSet);
 
         viewModel.observeCurrentRecipe()
                 .observe(getViewLifecycleOwner(), this::updateCurrentRecipe);
@@ -80,6 +84,10 @@ public class MainFragment extends BaseFragment {
         people = view.findViewById(R.id.people);
         recipeHeader = view.findViewById(R.id.recipeHeader);
         slidingPanel = view.findViewById(R.id.slidingPanel);
+        divider = view.findViewById(R.id.divider);
+        midWrapper = view.findViewById(R.id.midWrapper);
+        bottomWrapper = view.findViewById(R.id.bottomWrapper);
+        descriptionWrapper = view.findViewById(R.id.descriptionWrapper);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
@@ -136,6 +144,13 @@ public class MainFragment extends BaseFragment {
             float translationY = (float) (header.getHeight() * slideOffset * 1.5);
             header.setTranslationY(-translationY);
             arrow.setAlpha(MathUtils.clamp(1 - slideOffset * 3f, 0f, 1f));
+
+            float alpha = slideOffset;
+            divider.setAlpha(alpha);
+            midWrapper.setAlpha(alpha);
+            bottomWrapper.setAlpha(alpha);
+            descriptionWrapper.setAlpha(alpha);
+
             drawScrim();
         }
 
