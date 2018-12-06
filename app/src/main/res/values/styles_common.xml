@@ -13,4 +13,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+    <style name="TagChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipCornerRadius">0dp</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipIcon">@drawable/small_circle</item>
+        <item name="chipIconSize">5dp</item>
+        <item name="android:textColor">@color/basil_green_800</item>
+    </style>
+
 </resources>

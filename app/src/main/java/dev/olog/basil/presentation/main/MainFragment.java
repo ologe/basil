@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,11 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import dev.olog.basil.R;
+import dev.olog.basil.domain.entity.Tag;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.ScrimImageView;
 import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
+import io.reactivex.Observable;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
@@ -34,6 +40,7 @@ public class MainFragment extends BaseFragment {
     @Inject ViewModelProvider.Factory viewModelFactory;
     @Inject Navigator navigator;
 
+    private ChipGroup tagsGroup;
     private View headerWrapper;
     private View arrow;
     private View recipeHeader;
@@ -96,6 +103,7 @@ public class MainFragment extends BaseFragment {
         bottomWrapper = view.findViewById(R.id.bottomWrapper);
         descriptionWrapper = view.findViewById(R.id.descriptionWrapper);
         ingredients = view.findViewById(R.id.ingredients);
+        tagsGroup = view.findViewById(R.id.tags);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
@@ -104,6 +112,17 @@ public class MainFragment extends BaseFragment {
             description.setText(recipe.getDescription());
             calories.setText(recipe.getCalories());
             people.setText(recipe.getPeople());
+
+            tagsGroup.removeAllViews();
+            List<String> tags = Observable.fromIterable(recipe.getTags())
+                    .map(Tag::getValue)
+                    .toList()
+                    .blockingGet();
+            for (String tag : tags) {
+                Chip chip = new Chip(requireContext());
+                chip.setText(tag);
+                tagsGroup.addView(chip);
+            }
         }
     }
 

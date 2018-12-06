@@ -9,6 +9,7 @@
         <item name="android:statusBarColor">@color/status_bar_color</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="chipStyle">@style/TagChip</item>
     </style>
 
 </resources>
