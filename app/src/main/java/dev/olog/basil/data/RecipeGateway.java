@@ -7,8 +7,8 @@ import io.reactivex.Flowable;
 
 public interface RecipeGateway {
 
-    Flowable<List<Recipe>> getAll();
-    Flowable<Recipe> getById(long id);
+    Flowable<List<Recipe>> observeAll();
+    Flowable<Recipe> observeById(long id);
 
     void populateIfEmpty();
 

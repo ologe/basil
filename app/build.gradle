@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
 
@@ -34,6 +35,8 @@ android {
         }
     }
 
+    dataBinding.enabled = true
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,6 +55,8 @@ android {
 }
 
 dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.lifecycle"
@@ -81,8 +86,10 @@ dependencies {
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android"
-//    implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rx_binding"
-//    implementation "com.f2prateek.rx.preferences2:rx-preferences:$rootProject.rx_preferences"
+    implementation "com.github.dmstocking:support-optional:1.2"
+
+//    sliding panel
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
 //    glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glide"
@@ -99,4 +106,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+}
+repositories {
+    mavenCentral()
 }

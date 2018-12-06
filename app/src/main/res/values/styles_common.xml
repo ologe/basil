@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Divider">
+        <item name="android:alpha">.6</item>
+        <item name="android:background">@color/basil_green_500</item>
+    </style>
+
+</resources>

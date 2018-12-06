@@ -2,5 +2,16 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#D81B60</color>ù
+
+    <color name="background">#FFFBE6</color>
+
+    <color name="status_bar_color">#ECE9d5</color>
+
+    <color name="basil_orange">#FD5523</color>
+    <color name="basil_green_800">#356859</color>
+    <color name="basil_green_500">#37966F</color>
+    <color name="basil_green_100">#B9E4C9</color>
+    <color name="basil_green_50">#F1f5df</color>
+
 </resources>

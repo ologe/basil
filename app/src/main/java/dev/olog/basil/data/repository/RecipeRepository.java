@@ -38,7 +38,7 @@ public class RecipeRepository implements RecipeGateway {
     }
 
     @Override
-    public Flowable<List<Recipe>> getAll() {
+    public Flowable<List<Recipe>> observeAll() {
         return recipesDao.observeAllRecipes()
                 .switchMapSingle(recipeList -> Flowable.fromIterable(recipeList)
                         .concatMapSingle(recipe -> Single.zip(
@@ -53,7 +53,7 @@ public class RecipeRepository implements RecipeGateway {
     }
 
     @Override
-    public Flowable<Recipe> getById(long id) {
+    public Flowable<Recipe> observeById(long id) {
         return Flowable.combineLatest(
                 recipesDao.observeById(id),
                 ingredientsDao.observeByRecipeId(id),
@@ -67,7 +67,7 @@ public class RecipeRepository implements RecipeGateway {
     public void populateIfEmpty() {
 //        recipesDao.deleteAll();
 
-        if (getAll().blockingFirst().isEmpty()){
+        if (observeAll().blockingFirst().isEmpty()){
             List<RecipeEntity> recipes = Observable.range(1, 10)
                 .map(FakeEntityFactory::mockRecipe)
                 .toList()

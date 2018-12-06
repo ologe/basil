@@ -25,10 +25,11 @@ public class Navigator {
                 .commit();
     }
 
-    public void toDetailFragment(){
+    public void toDetailFragment(long id){
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, new DetailFragment(), DetailFragment.TAG)
+                .replace(R.id.fragmentContainer, DetailFragment.newInstance(id), DetailFragment.TAG)
+                .addToBackStack(DetailFragment.TAG)
                 .commit();
     }
 
