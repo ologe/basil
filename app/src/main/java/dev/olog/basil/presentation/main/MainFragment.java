@@ -1,8 +1,8 @@
 package dev.olog.basil.presentation.main;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -18,15 +18,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.ScrimImageView;
+import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
+
+import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.COLLAPSED;
+import static com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.HIDDEN;
 
 public class MainFragment extends BaseFragment {
-
-    public static final String TAG = MainFragment.class.getSimpleName();
 
     @Inject ViewModelProvider.Factory viewModelFactory;
     @Inject Navigator navigator;
@@ -110,6 +115,7 @@ public class MainFragment extends BaseFragment {
         slidingPanel.addPanelSlideListener(panelListener);
         list.addOnScrollListener(onScrollListener);
         ingredients.setOnClickListener(v -> navigator.toIngredientsFragment(viewModel.getCurrentId()));
+        slidingPanel.setScrollableView(descriptionWrapper);
     }
 
     @Override
@@ -124,13 +130,18 @@ public class MainFragment extends BaseFragment {
 
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            if (newState == RecyclerView.SCROLL_STATE_IDLE){
+            if (newState == SCROLL_STATE_IDLE){
                 int visiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
-                if (visiblePosition != RecyclerView.NO_POSITION){
+                if (visiblePosition != NO_POSITION){
                     viewModel.updatePosition(visiblePosition);
                 }
             }
         }
+    }
+
+    private void toggleViewPagerTouch(boolean enabled){
+        StoppableVerticalViewPager pager = requireActivity().findViewById(R.id.pager);
+        pager.setSwipeEnabled(enabled);
     }
 
     private class SlidingPanelListener extends SlidingUpPanelLayout.SimplePanelSlideListener {
@@ -144,6 +155,11 @@ public class MainFragment extends BaseFragment {
             if (resourceId > 0) {
                 statusBarHeight = getResources().getDimensionPixelSize(resourceId);
             }
+        }
+
+        @Override
+        public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+            toggleViewPagerTouch(newState == COLLAPSED || newState == HIDDEN);
         }
 
         @Override

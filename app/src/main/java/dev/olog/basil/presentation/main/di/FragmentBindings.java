@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import dev.olog.basil.presentation.ingredients.IngredientsFragment;
 import dev.olog.basil.presentation.main.MainFragment;
+import dev.olog.basil.presentation.search.SearchFragment;
 
 @Module
 public abstract class FragmentBindings {
@@ -13,5 +14,8 @@ public abstract class FragmentBindings {
 
     @ContributesAndroidInjector
     abstract IngredientsFragment provideIngredientsFragment();
+
+    @ContributesAndroidInjector
+    abstract SearchFragment provideSearchFragment();
 
 }

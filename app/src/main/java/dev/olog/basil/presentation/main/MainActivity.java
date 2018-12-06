@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseActivity;
 import dev.olog.basil.presentation.navigator.Navigator;
+import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MainActivity extends BaseActivity {
 
@@ -17,8 +18,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null){
-            navigator.toMainFragment();
-        }
+        VerticalViewPager pager = findViewById(R.id.pager);
+        pager.setAdapter(new VerticalPager(getSupportFragmentManager()));
+        pager.setCurrentItem(1);
     }
 }

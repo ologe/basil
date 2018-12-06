@@ -96,6 +96,8 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide"
     annotationProcessor 'com.android.support:support-annotations:28.0.0'
 
+    implementation 'com.github.castorflex.verticalviewpager:library:19.0.1'
+
 //    debug
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leak_canary"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$rootProject.leak_canary"

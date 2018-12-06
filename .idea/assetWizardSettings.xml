@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="vd_arrow_down" />
-                            <entry key="sourceFile" value="$USER_HOME$/Desktop/round-keyboard_arrow_down-24px.svg" />
+                            <entry key="outputName" value="vd_search" />
+                            <entry key="sourceFile" value="$USER_HOME$/Desktop/round-search-24px.svg" />
                           </map>
                         </option>
                       </PersistentState>
