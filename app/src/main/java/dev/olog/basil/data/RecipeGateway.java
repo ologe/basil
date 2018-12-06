@@ -1,4 +1,4 @@
-package dev.olog.basil.domain.gateway;
+package dev.olog.basil.data;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import io.reactivex.Flowable;
 public interface RecipeGateway {
 
     Flowable<List<Recipe>> getAll();
-    Flowable<Recipe> getById();
+    Flowable<Recipe> getById(long id);
+
+    void populateIfEmpty();
 
 }

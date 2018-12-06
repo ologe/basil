@@ -5,14 +5,14 @@ import javax.inject.Singleton;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
-import dev.olog.basil.app.schedulers.SchedulersModule;
 import dev.olog.basil.data.RepositoryModule;
 import dev.olog.basil.presentation.main.di.MainActivityInjector;
+import dev.olog.basil.presentation.viewmodel.ViewModelModule;
 
 @Component(modules = {
         AppModule.class,
         AndroidSupportInjectionModule.class,
-        SchedulersModule.class,
+        ViewModelModule.class,
 
 //        data
         RepositoryModule.class,
