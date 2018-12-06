@@ -143,11 +143,10 @@ public class MainFragment extends BaseFragment {
             recipeHeader.getLocationOnScreen(location);
 
             int visibleChild = layoutManager.findFirstCompletelyVisibleItemPosition();
-            View child = list.getChildAt(visibleChild);
-            if (child == null){
+            RecyclerView.ViewHolder viewHolder = list.findViewHolderForLayoutPosition(visibleChild);
+            if (viewHolder == null){
                 return;
             }
-            RecyclerView.ViewHolder viewHolder = list.getChildViewHolder(child);
             ConstraintLayout root = (ConstraintLayout) viewHolder.itemView;
             ScrimImageView image = (ScrimImageView) root.getChildAt(0);
             int bottom = image.getBottom();
@@ -155,8 +154,6 @@ public class MainFragment extends BaseFragment {
             boolean drawScrim = (location[1] - bottom - statusBarHeight) < 0;
 
             image.setDrawScrim(drawScrim);
-
-            System.out.println(drawScrim);
 
             if (drawScrim){
                 image.setScrimTop(location[1] - statusBarHeight);

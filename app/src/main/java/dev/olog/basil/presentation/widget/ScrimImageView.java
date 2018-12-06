@@ -53,7 +53,6 @@ public class ScrimImageView extends AppCompatImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (drawScrim){
-            System.out.println("draw");
             canvas.drawRect(rect, paint);
         }
     }
