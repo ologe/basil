@@ -67,11 +67,6 @@ public class ParallaxScrimImageView extends AppCompatImageView implements ViewTr
     }
 
     @Override
-    public void setImageResource(int resId) {
-        super.setImageResource(resId);
-    }
-
-    @Override
     protected void onDraw(Canvas canvas) {
         drawParallax(canvas);
         super.onDraw(canvas);
@@ -83,8 +78,8 @@ public class ParallaxScrimImageView extends AppCompatImageView implements ViewTr
     private void drawParallax(Canvas canvas){
         getLocationInWindow(viewLocation);
         if (getDrawable() != null) {
-            float translationY = ((float) getLeft() - ((float) viewLocation[0])) / 3;
-            canvas.translate(translationY, 0f);
+            float translationX = ((float) getLeft() - ((float) viewLocation[0])) / 3;
+            canvas.translate(translationX, 0f);
         }
     }
 

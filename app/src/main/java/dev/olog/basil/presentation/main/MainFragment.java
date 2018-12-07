@@ -24,10 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import dev.olog.basil.R;
 import dev.olog.basil.domain.entity.Tag;
 import dev.olog.basil.presentation.base.BaseFragment;
+import dev.olog.basil.presentation.model.DisplayableMiniRecipe;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView;
 import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
+import dev.olog.basil.utils.ListUtils;
 import io.reactivex.Observable;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
@@ -46,7 +48,6 @@ public class MainFragment extends BaseFragment {
     private View recipeHeader;
     private RecyclerView list;
 //    bottomsheet
-    private TextView title;
     private TextView description;
     private TextView calories;
     private TextView people;
@@ -56,12 +57,14 @@ public class MainFragment extends BaseFragment {
     private View descriptionWrapper;
     private View ingredients;
 
+    private RecyclerView recipeTitleList;
+
     private SlidingUpPanelLayout slidingPanel;
     private SlidingPanelListener panelListener;
     private OnScrollListener onScrollListener;
 
     private MainFragmentViewModel viewModel;
-    private RecipesViewPagerAdapter adapter;
+    private RecipesViewPagerAdapter imageAdapter;
     private LinearLayoutManager layoutManager;
 
     @Override
@@ -70,17 +73,25 @@ public class MainFragment extends BaseFragment {
         panelListener = new SlidingPanelListener();
         onScrollListener = new OnScrollListener();
 
-        adapter = new RecipesViewPagerAdapter();
+        imageAdapter = new RecipesViewPagerAdapter();
         layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
 
+        RecipeTitleAdapter recipeTitleAdapter = new RecipeTitleAdapter();
+        recipeTitleList.setAdapter(recipeTitleAdapter);
+        recipeTitleList.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false));
+        recipeTitleList.requestDisallowInterceptTouchEvent(true);
+
         list.setLayoutManager(layoutManager);
-        list.setAdapter(adapter);
+        list.setAdapter(imageAdapter);
 
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(list);
 
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
-        viewModel.observeRecipes().observe(getViewLifecycleOwner(), adapter::updateDataSet);
+        viewModel.observeRecipes().observe(getViewLifecycleOwner(), recipes -> {
+            imageAdapter.updateDataSet(recipes);
+            recipeTitleAdapter.updateDataSet(ListUtils.map(recipes, DisplayableMiniRecipe::getTitle));
+        });
 
         viewModel.observeCurrentRecipe()
                 .observe(getViewLifecycleOwner(), this::updateCurrentRecipe);
@@ -92,7 +103,6 @@ public class MainFragment extends BaseFragment {
         headerWrapper = view.findViewById(R.id.headerWrapper);
         arrow = view.findViewById(R.id.arrow);
         list = view.findViewById(R.id.list);
-        title = view.findViewById(R.id.title);
         description = view.findViewById(R.id.description);
         calories = view.findViewById(R.id.calories);
         people = view.findViewById(R.id.people);
@@ -104,11 +114,11 @@ public class MainFragment extends BaseFragment {
         descriptionWrapper = view.findViewById(R.id.descriptionWrapper);
         ingredients = view.findViewById(R.id.ingredients);
         tagsGroup = view.findViewById(R.id.tags);
+        recipeTitleList = view.findViewById(R.id.titleList);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
         if (recipe != null){
-            title.setText(recipe.getName());
             description.setText(recipe.getDescription());
             calories.setText(recipe.getCalories());
             people.setText(recipe.getPeople());
@@ -153,6 +163,11 @@ public class MainFragment extends BaseFragment {
                     viewModel.updatePosition(visiblePosition);
                 }
             }
+        }
+
+        @Override
+        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            recipeTitleList.scrollBy(dx, dy);
         }
     }
 

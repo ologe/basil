@@ -1,7 +1,6 @@
 package dev.olog.basil.presentation.main;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javax.inject.Inject;
 
@@ -14,7 +13,7 @@ import dev.olog.basil.data.RecipeGateway;
 import dev.olog.basil.domain.entity.Recipe;
 import dev.olog.basil.presentation.model.DisplayableIngredient;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
-import dev.olog.basil.presentation.model.DisplayableRecipeImage;
+import dev.olog.basil.presentation.model.DisplayableMiniRecipe;
 import dev.olog.basil.utils.ListUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainFragmentViewModel extends ViewModel {
 
-    private final MutableLiveData<List<DisplayableRecipeImage>> recipeListLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<DisplayableMiniRecipe>> recipeListLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<Integer> currentPositionPublisher = new MutableLiveData<>();
     private final BehaviorProcessor<String> filterPublisher = BehaviorProcessor.createDefault("");
@@ -65,7 +64,7 @@ public class MainFragmentViewModel extends ViewModel {
         currentPositionPublisher.setValue(position);
     }
 
-    public LiveData<List<DisplayableRecipeImage>> observeRecipes() {
+    public LiveData<List<DisplayableMiniRecipe>> observeRecipes() {
         return recipeListLiveData;
     }
 
@@ -105,9 +104,10 @@ public class MainFragmentViewModel extends ViewModel {
         subscriptions.clear();
     }
 
-    private static DisplayableRecipeImage toPresentationAsImage(Recipe recipe){
-        return new DisplayableRecipeImage(
+    private static DisplayableMiniRecipe toPresentationAsImage(Recipe recipe){
+        return new DisplayableMiniRecipe(
                 recipe.getId(),
+                recipe.getName(),
                 recipe.getImages().get(0)
         );
     }
@@ -134,7 +134,7 @@ public class MainFragmentViewModel extends ViewModel {
     public long getCurrentId() {
         try {
             Integer currentIndex = currentPositionPublisher.getValue();
-            List<DisplayableRecipeImage> recipes = recipeListLiveData.getValue();
+            List<DisplayableMiniRecipe> recipes = recipeListLiveData.getValue();
             return recipes.get(currentIndex).getId();
         } catch (Exception ex){
             return -1;

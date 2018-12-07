@@ -6,15 +6,15 @@ import androidx.databinding.ViewDataBinding;
 import dev.olog.basil.BR;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseAdapter;
-import dev.olog.basil.presentation.model.DisplayableRecipeImage;
+import dev.olog.basil.presentation.model.DisplayableMiniRecipe;
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView;
 
-public class RecipesViewPagerAdapter extends BaseAdapter<DisplayableRecipeImage> {
+public class RecipesViewPagerAdapter extends BaseAdapter<DisplayableMiniRecipe> {
 
     public RecipesViewPagerAdapter() {
     }
 
-    public RecipesViewPagerAdapter(List<DisplayableRecipeImage> data) {
+    public RecipesViewPagerAdapter(List<DisplayableMiniRecipe> data) {
         super(data);
     }
 
@@ -24,7 +24,7 @@ public class RecipesViewPagerAdapter extends BaseAdapter<DisplayableRecipeImage>
     }
 
     @Override
-    protected void bind(ViewDataBinding binding, DisplayableRecipeImage item, int position) {
+    protected void bind(ViewDataBinding binding, DisplayableMiniRecipe item, int position) {
         binding.setVariable(BR.recipe, item);
     }
 
