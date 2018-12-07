@@ -26,7 +26,7 @@ import dev.olog.basil.domain.entity.Tag;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.model.DisplayableRecipe;
 import dev.olog.basil.presentation.navigator.Navigator;
-import dev.olog.basil.presentation.widget.ScrimImageView;
+import dev.olog.basil.presentation.widget.ParallaxScrimImageView;
 import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
 import io.reactivex.Observable;
 
@@ -203,7 +203,7 @@ public class MainFragment extends BaseFragment {
                 return;
             }
             ConstraintLayout root = (ConstraintLayout) viewHolder.itemView;
-            ScrimImageView image = (ScrimImageView) root.getChildAt(0);
+            ParallaxScrimImageView image = (ParallaxScrimImageView) root.getChildAt(0);
             int bottom = image.getBottom();
 
             boolean drawScrim = (location[1] - bottom - statusBarHeight) < 0;

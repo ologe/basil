@@ -5,26 +5,31 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.ViewTreeObserver;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import dev.olog.basil.R;
 
-public class ScrimImageView extends AppCompatImageView {
+public class ParallaxScrimImageView extends AppCompatImageView implements ViewTreeObserver.OnScrollChangedListener {
 
+//    parallax
+    private int[] viewLocation = new int[]{0, 0};
+
+//    scrim
     private Rect rect;
     private boolean drawScrim = false;
     private Paint paint;
 
-    public ScrimImageView(Context context) {
+    public ParallaxScrimImageView(Context context) {
         this(context, null);
     }
 
-    public ScrimImageView(Context context, AttributeSet attrs) {
+    public ParallaxScrimImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ScrimImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ParallaxScrimImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -35,6 +40,18 @@ public class ScrimImageView extends AppCompatImageView {
 
         int scrimColor = ContextCompat.getColor(context, R.color.basil_green_50);
         paint.setColor(scrimColor);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        getViewTreeObserver().addOnScrollChangedListener(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        getViewTreeObserver().removeOnScrollChangedListener(this);
     }
 
     public void setScrimTop(int top){
@@ -50,10 +67,30 @@ public class ScrimImageView extends AppCompatImageView {
     }
 
     @Override
+    public void setImageResource(int resId) {
+        super.setImageResource(resId);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
+        drawParallax(canvas);
         super.onDraw(canvas);
         if (drawScrim){
             canvas.drawRect(rect, paint);
         }
+    }
+
+    private void drawParallax(Canvas canvas){
+        getLocationInWindow(viewLocation);
+        if (getDrawable() != null) {
+            float translationY = ((float) getLeft() - ((float) viewLocation[0])) / 3;
+            canvas.translate(translationY, 0f);
+        }
+    }
+
+
+    @Override
+    public void onScrollChanged() {
+        invalidate();
     }
 }

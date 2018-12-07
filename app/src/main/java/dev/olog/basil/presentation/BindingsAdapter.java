@@ -13,12 +13,12 @@ public class BindingsAdapter {
     public static void loadRecipeImage(ImageView imageView, DisplayableRecipeImage recipe){
         int imageName;
         if (recipe.getId() % 2 == 0){
-            imageName = R.drawable.spinach;
-        } else {
             imageName = R.drawable.pasta;
+        } else {
+            imageName = R.drawable.salmon;
         }
 
-
+//        imageView.setImageResource(imageName);
         GlideApp.with(imageView.getContext())
                 .load(imageName)
                 .into(imageView);

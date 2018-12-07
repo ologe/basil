@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <dev.olog.basil.presentation.widget.ScrimImageView
+        <dev.olog.basil.presentation.widget.ParallaxScrimImageView
+            android:id="@+id/image"
             tools:src="@drawable/pasta"
             app:loadRecipeImage="@{recipe}"
             android:layout_width="0dp"

@@ -7,6 +7,7 @@ import dev.olog.basil.BR;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseAdapter;
 import dev.olog.basil.presentation.model.DisplayableRecipeImage;
+import dev.olog.basil.presentation.widget.ParallaxScrimImageView;
 
 public class RecipesViewPagerAdapter extends BaseAdapter<DisplayableRecipeImage> {
 
@@ -19,7 +20,7 @@ public class RecipesViewPagerAdapter extends BaseAdapter<DisplayableRecipeImage>
 
     @Override
     protected void initViewHolderListeners(ViewDataBinding binding) {
-
+        ParallaxScrimImageView imageView = binding.getRoot().findViewById(R.id.image);
     }
 
     @Override
