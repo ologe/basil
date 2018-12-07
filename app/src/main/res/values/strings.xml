@@ -7,4 +7,5 @@
     <string name="fat">Fat</string>
     <string name="search">Search</string>
     <string name="search_hint">Recipe, ingredients or tags</string>
+    <string name="new_recipe">New recipe</string>
 </resources>
