@@ -8,18 +8,19 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseActivity;
 import dev.olog.basil.presentation.navigator.Navigator;
+import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
 import dev.olog.basil.utils.ListUtils;
-import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class MainActivity extends BaseActivity {
 
     @Inject Navigator navigator;
 
-    private VerticalViewPager pager;
+    private StoppableVerticalViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +38,28 @@ public class MainActivity extends BaseActivity {
             pager.setCurrentItem(1);
             return;
         } else if (pager.getCurrentItem() == 1){
-            Optional<Fragment> fragment = ListUtils.find(getSupportFragmentManager().getFragments(), f -> f instanceof MainFragment);
-            if (fragment.isPresent()){
-                View view = fragment.get().getView();
-                if (view != null){
-                    SlidingUpPanelLayout slidingPanel = view.findViewById(R.id.slidingPanel);
-                    if (slidingPanel.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED){
-                        slidingPanel.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                        return;
-                    }
+            SlidingUpPanelLayout slidingPanel = findSlidingPanel();
+            if (slidingPanel != null){
+                if (slidingPanel.getPanelState() == SlidingUpPanelLayout.PanelState.EXPANDED){
+                    slidingPanel.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+                    return;
                 }
             }
         }
 
         super.onBackPressed();
     }
+
+    @Nullable
+    private SlidingUpPanelLayout findSlidingPanel(){
+        Optional<Fragment> fragment = ListUtils.find(getSupportFragmentManager().getFragments(), f -> f instanceof MainFragment);
+        if (fragment.isPresent()){
+            View view = fragment.get().getView();
+            if (view != null){
+                return view.findViewById(R.id.slidingPanel);
+            }
+        }
+        return null;
+    }
+
 }

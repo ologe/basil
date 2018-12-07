@@ -46,7 +46,7 @@
             android:orientation="horizontal"
             tools:layout_marginBottom="@dimen/panel_height"
             android:layout_marginTop="@dimen/margin_very_big"
-            android:translationY="-20dp"/>
+            android:translationY="-50dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
