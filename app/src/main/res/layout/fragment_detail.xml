@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detailRoot">
 
     <View
         android:id="@+id/scrim"
@@ -23,11 +24,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipeHeader"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/panel_height"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintStart_toStartOf="@id/scrim"
+        app:layout_constraintEnd_toEndOf="@id/scrim">
 
         <dev.olog.basil.presentation.widget.NoScrollRecyclerView
             android:id="@+id/titleList"
@@ -48,8 +49,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/arrow"
             android:layout_marginTop="@dimen/margin_big"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="36dp"
             style="@style/Divider"
             android:alpha="0"
             tools:alpha="1"/>

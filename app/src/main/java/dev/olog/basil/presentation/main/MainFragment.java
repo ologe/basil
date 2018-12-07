@@ -2,6 +2,8 @@ package dev.olog.basil.presentation.main;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
@@ -30,6 +32,7 @@ import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView;
 import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
 import dev.olog.basil.utils.ListUtils;
+import dev.olog.basil.utils.WindowUtils;
 import io.reactivex.Observable;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
@@ -56,6 +59,7 @@ public class MainFragment extends BaseFragment {
     private View bottomWrapper;
     private View descriptionWrapper;
     private View ingredients;
+    private View scrim;
 
     private RecyclerView recipeTitleList;
 
@@ -88,9 +92,11 @@ public class MainFragment extends BaseFragment {
         snapHelper.attachToRecyclerView(list);
 
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
+
         viewModel.observeRecipes().observe(getViewLifecycleOwner(), recipes -> {
             imageAdapter.updateDataSet(recipes);
             recipeTitleAdapter.updateDataSet(ListUtils.map(recipes, DisplayableMiniRecipe::getTitle));
+            adjustDetailBorders();
         });
 
         viewModel.observeCurrentRecipe()
@@ -115,6 +121,7 @@ public class MainFragment extends BaseFragment {
         ingredients = view.findViewById(R.id.ingredients);
         tagsGroup = view.findViewById(R.id.tags);
         recipeTitleList = view.findViewById(R.id.titleList);
+        scrim = view.findViewById(R.id.scrim);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
@@ -134,6 +141,30 @@ public class MainFragment extends BaseFragment {
                 tagsGroup.addView(chip);
             }
         }
+    }
+
+    private void adjustDetailBorders(){
+        list.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                list.getViewTreeObserver().removeOnPreDrawListener(this);
+                int firstVisible = layoutManager.findFirstCompletelyVisibleItemPosition();
+                RecyclerView.ViewHolder viewHolder = list.findViewHolderForLayoutPosition(firstVisible);
+                if (viewHolder != null){
+                    View imageView = viewHolder.itemView.findViewById(R.id.image);
+                    int marginHorizontal = imageView.getLeft();
+                    int[] location = new int[]{0, 0};
+                    imageView.getLocationOnScreen(location);
+
+                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) scrim.getLayoutParams();
+                    layoutParams.setMarginStart(marginHorizontal);
+                    layoutParams.setMarginEnd(marginHorizontal);
+                    layoutParams.topMargin = location[1] - WindowUtils.getStatusBarHeight(getResources());
+                    scrim.setLayoutParams(layoutParams);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -190,10 +221,7 @@ public class MainFragment extends BaseFragment {
         private int[] location = new int[]{0, 0};
 
         public SlidingPanelListener() {
-            int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-            if (resourceId > 0) {
-                statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-            }
+            statusBarHeight = WindowUtils.getStatusBarHeight(getResources());
         }
 
         @Override

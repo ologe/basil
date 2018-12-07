@@ -2,7 +2,6 @@
 <resources>
 
     <style name="Divider">
-        <item name="android:alpha">.6</item>
         <item name="android:background">@color/basil_green_500</item>
     </style>
 
