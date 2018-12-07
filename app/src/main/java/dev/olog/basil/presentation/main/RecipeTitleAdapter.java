@@ -14,7 +14,7 @@ public class RecipeTitleAdapter extends BaseAdapter<String> {
 
     @Override
     protected void bind(ViewDataBinding binding, String item, int position) {
-        binding.setVariable(BR.item, "aaa");
+        binding.setVariable(BR.item, item);
     }
 
     @Override

@@ -155,6 +155,9 @@ public class MainFragment extends BaseFragment {
 
     private class OnScrollListener extends RecyclerView.OnScrollListener {
 
+        // risolve bug all'avvio dell'app
+        private boolean neverScrolled = true;
+
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             if (newState == SCROLL_STATE_IDLE){
@@ -167,6 +170,10 @@ public class MainFragment extends BaseFragment {
 
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            if (neverScrolled){
+                neverScrolled = false;
+                return;
+            }
             recipeTitleList.scrollBy(dx, dy);
         }
     }
