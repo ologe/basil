@@ -30,7 +30,7 @@ public class ListUtils {
                 .blockingGet();
     }
 
-    @Nullable
+    @NonNull
     @CheckResult
     public static <T> Optional<T> find(List<T> input, Predicate<T> predicate){
         return Observable.fromIterable(input)
