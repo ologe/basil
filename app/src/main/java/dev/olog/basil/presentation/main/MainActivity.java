@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         pager = findViewById(R.id.pager);
-        pager.setAdapter(new VerticalPager(getSupportFragmentManager()));
+        pager.setAdapter(new VerticalPagerAdapter(getSupportFragmentManager()));
         pager.setCurrentItem(1);
     }
 

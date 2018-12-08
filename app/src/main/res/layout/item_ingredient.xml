@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/wrapped_add"
+            android:src="@drawable/wrapped_add_big"
             android:background="@null" />
 
         <TextView

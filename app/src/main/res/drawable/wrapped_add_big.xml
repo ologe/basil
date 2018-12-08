@@ -10,11 +10,7 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/vd_add"
-        android:top="@dimen/wrapped_search_padding"
-        android:bottom="@dimen/wrapped_search_padding"
-        android:left="@dimen/wrapped_search_padding"
-        android:right="@dimen/wrapped_search_padding">
+    <item android:drawable="@drawable/vd_add">
         <color android:color="@color/basil_green_800"/>
     </item>
 
