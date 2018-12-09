@@ -21,9 +21,9 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:imeOptions="actionDone"
-            style="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"
-            android:layout_marginEnd="36dp" />
+            android:layout_marginEnd="36dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

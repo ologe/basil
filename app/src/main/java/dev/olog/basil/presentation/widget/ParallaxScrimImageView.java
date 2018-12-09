@@ -79,7 +79,10 @@ public class ParallaxScrimImageView extends AppCompatImageView implements ViewTr
         getLocationInWindow(viewLocation);
         if (getDrawable() != null) {
             float translationX = ((float) getLeft() - ((float) viewLocation[0])) / 3;
-            canvas.translate(translationX, 0f);
+
+            float translationY = ((float) getTop() - ((float) viewLocation[1])) / 10;
+
+            canvas.translate(translationX, translationY);
         }
     }
 

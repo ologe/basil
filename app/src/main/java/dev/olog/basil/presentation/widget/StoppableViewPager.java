@@ -32,4 +32,11 @@ public class StoppableViewPager extends ViewPager {
         return false;
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (isSwipeEnabled){
+            return super.onTouchEvent(ev);
+        }
+        return false;
+    }
 }

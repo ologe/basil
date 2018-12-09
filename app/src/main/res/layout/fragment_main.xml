@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:translationY="-50dp"/>
+                android:translationY="-35dp" />
 
         </FrameLayout>
 
@@ -46,7 +46,7 @@
             android:orientation="horizontal"
             tools:layout_marginBottom="@dimen/panel_height"
             android:layout_marginTop="@dimen/margin_very_big"
-            android:translationY="-50dp"/>
+            android:translationY="-20dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

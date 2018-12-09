@@ -22,6 +22,17 @@
         android:visibility="invisible"
         tools:visibility="visible"/>
 
+    <dev.olog.basil.presentation.widget.NoScrollRecyclerView
+        android:id="@+id/titleList"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/panel_height"
+        tools:listitem="@layout/item_recipe_title"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="48dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipeHeader"
         android:layout_width="0dp"
@@ -29,17 +40,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/scrim"
         app:layout_constraintEnd_toEndOf="@id/scrim">
-
-        <dev.olog.basil.presentation.widget.NoScrollRecyclerView
-            android:id="@+id/titleList"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_recipe_title"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/arrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
         <View
             android:id="@+id/divider"
@@ -52,7 +52,6 @@
             style="@style/Divider"
             android:alpha="0"
             tools:alpha="1"/>
-
 
         <ImageButton
             android:id="@+id/arrow"
@@ -109,7 +108,7 @@
         app:layout_constraintStart_toStartOf="@id/scrim"
         app:layout_constraintEnd_toEndOf="@id/scrim"
         app:layout_constraintBottom_toTopOf="@+id/bottomWrapper"
-        android:layout_marginTop="@dimen/margin_mid">
+        android:layout_marginTop="@dimen/margin_big">
 
         <TextView
             android:id="@+id/caloriesHeader"
@@ -119,7 +118,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/peopleHeader"
-            android:layout_marginTop="@dimen/margin_very_big"
             style="@style/RecipeDescriptionHeader"/>
 
         <TextView

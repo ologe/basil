@@ -8,4 +8,8 @@
     <string name="search">Search</string>
     <string name="search_hint">Recipe, ingredients or tags</string>
     <string name="new_recipe">New recipe</string>
+    <string name="recipe_name">Name</string>
+    <string name="recipe_description">Description</string>
+    <string name="recipe_calories">Calories</string>
+    <string name="recipe_people">People</string>
 </resources>
