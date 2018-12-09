@@ -11,7 +11,7 @@ import io.reactivex.Flowable;
 @Dao
 public abstract class RecipesDao {
 
-    @Query("SELECT * from recipes")
+    @Query("SELECT * from recipes order by id desc")
     public abstract Flowable<List<RecipeEntity>> observeAllRecipes();
 
     @Query("SELECT * from recipes where id = :id")

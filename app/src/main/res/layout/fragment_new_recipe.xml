@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +86,40 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/caloriesWrapper"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:overScrollMode="never"
+        android:padding="@dimen/margin_big"
+        android:paddingStart="48dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            android:requiresFadingEdge="horizontal"
+            android:layout_gravity="center_vertical">
+
+            <!--will be deleted at runtime-->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/newTag"
+                android:text="@string/add_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/NewTagChip" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,6 +127,8 @@
         android:layout_margin="@dimen/margin_big"
         app:fabSize="normal"
         android:src="@drawable/vd_hot"
-        android:tint="#EFFF"/>
+        android:tint="#EFFF"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

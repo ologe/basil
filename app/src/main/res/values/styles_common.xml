@@ -19,6 +19,16 @@
         <item name="chipIcon">@drawable/small_circle</item>
         <item name="chipIconSize">5dp</item>
         <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="NewTagChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipIcon">@drawable/vd_add</item>
+        <item name="android:textColor">@color/basil_green_800</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/basil_green_800</item>
+
     </style>
 
 </resources>

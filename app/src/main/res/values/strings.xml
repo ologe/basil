@@ -12,4 +12,10 @@
     <string name="recipe_description">Description</string>
     <string name="recipe_calories">Calories</string>
     <string name="recipe_people">People</string>
+    <string name="add_tag">Add tag</string>
+    <string name="tag_name">Tag name</string>
+
+    <string name="popup_add">Add</string>
+    <string name="popup_cancel">Cancel</string>
+
 </resources>

@@ -1,5 +1,7 @@
 package dev.olog.basil.presentation.main;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,10 +43,14 @@ public class MainFragmentViewModel extends ViewModel {
         Disposable disposable = Flowable.combineLatest(
                 recipeGateway.observeAll(),
                 filterPublisher,
-                (recipes, query) -> ListUtils.filter(recipes, recipe -> recipe.getName().equalsIgnoreCase(query) ||
-                        ListUtils.find(recipe.getIngredients(), ingredient -> ingredient.getName().equalsIgnoreCase(query)) != null ||
-                        ListUtils.find(recipe.getIngredients(), ingredient -> ingredient.getName().equalsIgnoreCase(query)) != null
-                ))
+                (recipes, query) -> {
+                    if (TextUtils.isEmpty(query)){
+                        return recipes;
+                    }
+                    return ListUtils.filter(recipes, recipe -> recipe.getName().equalsIgnoreCase(query) ||
+                            ListUtils.find(recipe.getIngredients(), ingredient -> ingredient.getName().equalsIgnoreCase(query)).isPresent() ||
+                            ListUtils.find(recipe.getTags(), ingredient -> ingredient.getValue().equalsIgnoreCase(query)).isPresent());
+                })
                 .subscribeOn(Schedulers.io())
                 .map(recipes -> ListUtils.map(recipes, MainFragmentViewModel::toPresentationAsImage))
                 .observeOn(AndroidSchedulers.mainThread())
