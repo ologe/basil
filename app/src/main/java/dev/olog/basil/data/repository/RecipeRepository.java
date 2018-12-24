@@ -86,10 +86,21 @@ public class RecipeRepository implements RecipeGateway {
 
     @Override
     public Completable saveRecipe(Recipe recipe) {
-        return Completable.error(new Throwable());
+        return Completable.create(emitter -> {
+            long recipeId = recipesDao.insert(Mapper.toEntity(recipe));
+            ingredientsDao.insertGroup(ListUtils.map(recipe.getIngredients(), ingredient -> Mapper.toEntity(recipeId, ingredient)));
+            tagsDao.insertGroup(ListUtils.map(recipe.getTags(), tags -> Mapper.toEntity(recipeId, tags)));
+            imagesDao.insertGroup(ListUtils.map(recipe.getImages(), image -> new ImageEntity(0, recipeId, image)));
+        });
     }
 
     private static class Mapper {
+
+        static RecipeEntity toEntity(Recipe recipe){
+            return new RecipeEntity(
+                    0, recipe.getName(), recipe.getDescription(), recipe.getPeople(), recipe.getCalories()
+            );
+        }
 
         static Recipe recipeMapper(RecipeEntity recipe, List<IngredientEntity> ingredients, List<ImageEntity> images, List<TagEntity> tags){
             return new Recipe(
@@ -113,10 +124,28 @@ public class RecipeRepository implements RecipeGateway {
             );
         }
 
+        static IngredientEntity toEntity(long recipeId, Ingredient ingredient){
+            return new IngredientEntity(
+                    0,
+                    recipeId,
+                    ingredient.getName(),
+                    ingredient.getQuantity(),
+                    ingredient.getOrder()
+            );
+        }
+
         static Tag toDomain(TagEntity entity){
             return new Tag(
                     entity.getRecipeId(),
                     entity.getValue()
+            );
+        }
+
+        static TagEntity toEntity(long recipeId, Tag tag){
+            return new TagEntity(
+                    0,
+                    recipeId,
+                    tag.getValue()
             );
         }
 

@@ -16,7 +16,7 @@ import dev.olog.basil.data.entity.TagEntity;
         IngredientEntity.class,
         TagEntity.class,
         ImageEntity.class
-}, version = 1, exportSchema = false)
+}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract RecipesDao recipeDao();

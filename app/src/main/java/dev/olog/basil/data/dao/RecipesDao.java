@@ -18,6 +18,9 @@ public abstract class RecipesDao {
     public abstract Flowable<RecipeEntity> observeById(long id);
 
     @Insert
+    public abstract long insert(RecipeEntity recipe);
+
+    @Insert
     public abstract void insertGroup(List<RecipeEntity> recipes);
 
     @Query("DELETE FROM recipes")

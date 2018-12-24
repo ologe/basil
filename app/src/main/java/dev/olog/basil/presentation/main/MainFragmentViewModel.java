@@ -98,6 +98,8 @@ public class MainFragmentViewModel extends ViewModel {
                 return LiveDataReactiveStreams.fromPublisher(
                         recipeGateway.observeById(id)
                                 .map(MainFragmentViewModel::toIngredients)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
                 );
             } catch (Throwable ex){
                 return new MutableLiveData<>();

@@ -13,7 +13,9 @@ import dev.olog.basil.R;
 import dev.olog.basil.dagger.qualifier.ApplicationContext;
 import dev.olog.basil.data.RecipeGateway;
 import dev.olog.basil.domain.entity.Recipe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewRecipePresenter implements DefaultLifecycleObserver {
 
@@ -41,6 +43,8 @@ public class NewRecipePresenter implements DefaultLifecycleObserver {
             disposable.dispose();
         }
         disposable = recipeRepository.saveRecipe(recipe)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     Toast.makeText(context, R.string.new_recipe_created, Toast.LENGTH_SHORT).show();
                 }, throwable -> {
