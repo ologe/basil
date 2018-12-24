@@ -28,7 +28,7 @@
 
     <ImageButton
         android:id="@+id/send"
-        android:src="@drawable/vd_send"
+        android:src="@drawable/vd_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/wrapper"
