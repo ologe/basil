@@ -1,8 +1,10 @@
-package dev.olog.basil.presentation.search;
+package dev.olog.basil.presentation.actions;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import javax.inject.Inject;
@@ -14,20 +16,22 @@ import androidx.lifecycle.ViewModelProviders;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.main.MainFragmentViewModel;
+import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class SearchFragment extends BaseFragment {
-
-    @Inject ViewModelProvider.Factory viewModelFactory;
-    private MainFragmentViewModel viewModel;
 
     private EditText editText;
     private View send;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private MainFragmentViewModel viewModel;
+
     @Override
     protected void onViewBound(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
         editText = view.findViewById(R.id.editText);
         send = view.findViewById(R.id.send);
-        viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
     }
 
     @Override
@@ -54,6 +58,8 @@ public class SearchFragment extends BaseFragment {
 
     private void updateFilter(){
         viewModel.updateFilter(editText.getText().toString());
+        ((VerticalViewPager) requireActivity().findViewById(R.id.pager))
+                .setCurrentItem(1);
     }
 
     @Override

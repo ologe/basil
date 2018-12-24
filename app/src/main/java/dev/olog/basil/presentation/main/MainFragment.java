@@ -57,7 +57,6 @@ public class MainFragment extends BaseFragment {
     private View divider;
     private View midWrapper;
     private View bottomWrapper;
-    private View descriptionWrapper;
     private View ingredients;
     private View scrim;
 
@@ -117,7 +116,6 @@ public class MainFragment extends BaseFragment {
         divider = view.findViewById(R.id.divider);
         midWrapper = view.findViewById(R.id.midWrapper);
         bottomWrapper = view.findViewById(R.id.bottomWrapper);
-        descriptionWrapper = view.findViewById(R.id.descriptionWrapper);
         ingredients = view.findViewById(R.id.ingredients);
         tagsGroup = view.findViewById(R.id.tags);
         recipeTitleList = view.findViewById(R.id.titleList);
@@ -173,7 +171,6 @@ public class MainFragment extends BaseFragment {
         slidingPanel.addPanelSlideListener(panelListener);
         list.addOnScrollListener(onScrollListener);
         ingredients.setOnClickListener(v -> navigator.toIngredientsFragment(viewModel.getCurrentId()));
-        slidingPanel.setScrollableView(descriptionWrapper);
     }
 
     @Override
@@ -232,7 +229,7 @@ public class MainFragment extends BaseFragment {
             divider.setAlpha(alpha);
             midWrapper.setAlpha(alpha);
             bottomWrapper.setAlpha(alpha);
-            descriptionWrapper.setAlpha(alpha);
+            description.setAlpha(alpha);
 
             drawScrim();
         }

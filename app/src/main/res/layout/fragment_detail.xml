@@ -69,8 +69,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/descriptionWrapper"
+    <TextView
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_mid"
@@ -80,31 +80,22 @@
         app:layout_constraintEnd_toEndOf="@+id/scrim"
         app:layout_constraintStart_toStartOf="@+id/scrim"
         app:layout_constraintTop_toBottomOf="@+id/recipeHeader"
-        android:overScrollMode="never"
-        android:requiresFadingEdge="vertical"
-        android:scrollbars="none">
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:fontFamily="@font/lekton"
-            tools:text="@tools:sample/lorem"
-            android:textColor="@color/basil_green_800"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="30sp"
-            app:autoSizeMinTextSize="20sp"
-            android:textAlignment="center" />
-
-    </ScrollView>
+        app:fontFamily="@font/lekton"
+        tools:text="@tools:sample/lorem"
+        android:textColor="@color/basil_green_800"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textStyle="bold"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeMinTextSize="20sp"
+        android:textAlignment="center"
+        android:ellipsize="end"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/midWrapper"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         app:layout_constraintStart_toStartOf="@id/scrim"
         app:layout_constraintEnd_toEndOf="@id/scrim"
         app:layout_constraintBottom_toTopOf="@+id/bottomWrapper"
