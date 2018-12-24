@@ -19,6 +19,7 @@ import dev.olog.basil.domain.entity.Ingredient;
 import dev.olog.basil.domain.entity.Recipe;
 import dev.olog.basil.domain.entity.Tag;
 import dev.olog.basil.utils.ListUtils;
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -81,6 +82,11 @@ public class RecipeRepository implements RecipeGateway {
             }
 
         }
+    }
+
+    @Override
+    public Completable saveRecipe(Recipe recipe) {
+        return Completable.error(new Throwable());
     }
 
     private static class Mapper {

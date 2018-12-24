@@ -2,9 +2,7 @@ package dev.olog.basil.presentation.createnew;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,19 +11,30 @@ import com.google.android.material.chip.ChipGroup;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveDataReactiveStreams;
 import dev.olog.basil.R;
+import dev.olog.basil.domain.entity.Ingredient;
+import dev.olog.basil.domain.entity.Recipe;
+import dev.olog.basil.domain.entity.Tag;
+import dev.olog.basil.presentation.DrawsOnTop;
+import dev.olog.basil.presentation.base.BaseFragment;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 
-public class NewRecipeFragment extends Fragment {
+public class NewRecipeFragment extends BaseFragment implements DrawsOnTop {
 
+    public static final String TAG = NewRecipeFragment.class.getSimpleName();
+
+    private View back;
     private TextView recipeName;
     private TextView recipeDescription;
     private TextView recipeCalories;
@@ -35,17 +44,14 @@ public class NewRecipeFragment extends Fragment {
     private Chip newTag;
     private View save;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_new_recipe, container, false);
-    }
+    @Inject NewRecipePresenter presenter;
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    protected void onViewBound(@NonNull View view, @Nullable Bundle savedInstanceState) {
         newTag = view.findViewById(R.id.newTag);
         tags = view.findViewById(R.id.tags);
         save = view.findViewById(R.id.save);
+        back = view.findViewById(R.id.back);
 
         recipeName = view.findViewById(R.id.name);
         recipeDescription = view.findViewById(R.id.description);
@@ -68,7 +74,26 @@ public class NewRecipeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         newTag.setOnClickListener(v -> showAddTagDialog());
-//        save.setOnClickListener(v -> );
+        save.setOnClickListener(v -> {
+            List<Ingredient> ingredients = new ArrayList<>();
+            List<Tag> tags = new ArrayList<>();
+            for (int i = 0; i < this.tags.getChildCount(); i++) {
+                tags.add(new Tag(0, ((Chip) this.tags.getChildAt(i)).getText().toString()));
+            }
+            List<String> images = new ArrayList<>();
+            presenter.saveRecipe(new Recipe(
+                    0,
+                    recipeName.getText().toString(),
+                    recipeDescription.getText().toString(),
+                    Integer.parseInt(recipePeople.getText().toString()),
+                    Integer.parseInt(recipeCalories.getText().toString()),
+                    ingredients,
+                    images,
+                    tags
+            ));
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
+        back.setOnClickListener(v -> requireActivity().onBackPressed());
     }
 
     @Override
@@ -76,6 +101,7 @@ public class NewRecipeFragment extends Fragment {
         super.onPause();
         newTag.setOnClickListener(null);
         save.setOnClickListener(null);
+        back.setOnClickListener(null);
     }
 
     private void showAddTagDialog(){
@@ -102,6 +128,11 @@ public class NewRecipeFragment extends Fragment {
                 .map(TextViewAfterTextChangeEvent::editable)
                 .map(editable -> !TextUtils.isEmpty(editable))
                 .toFlowable(BackpressureStrategy.LATEST);
+    }
+
+    @Override
+    protected int provideLayoutId() {
+        return R.layout.fragment_new_recipe;
     }
 
 }

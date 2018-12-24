@@ -5,8 +5,47 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:background="?android:windowBackground">
 
+    <ImageButton
+        android:id="@+id/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vd_back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="12dp"
+        android:tint="@color/basil_green_800"/>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/wrapped_add"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="72dp"/>
+
+    <TextView
+        android:id="@+id/header"
+        android:text="@string/new_recipe"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:fontFamily="@font/lekton"
+        android:textAllCaps="true"
+        android:textColor="@color/basil_green_800"
+        android:scaleY=".8"
+        android:scaleX=".8"
+        android:textAlignment="center"
+        android:padding="8dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameWrapper"
@@ -15,7 +54,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:hint="@string/recipe_name"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

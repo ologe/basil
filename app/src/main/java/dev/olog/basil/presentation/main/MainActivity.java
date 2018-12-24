@@ -10,7 +10,9 @@ import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import dev.olog.basil.R;
+import dev.olog.basil.presentation.DrawsOnTop;
 import dev.olog.basil.presentation.base.BaseActivity;
 import dev.olog.basil.presentation.navigator.Navigator;
 import dev.olog.basil.presentation.widget.StoppableVerticalViewPager;
@@ -34,6 +36,16 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        int entries = fm.getBackStackEntryCount();
+        if (entries > 0){
+            Fragment topFragment = fm.findFragmentByTag(fm.getBackStackEntryAt(entries - 1).getName());
+            if (topFragment instanceof DrawsOnTop){
+                super.onBackPressed();
+                return;
+            }
+        }
+
         if (pager.getCurrentItem() == 0){
             pager.setCurrentItem(1);
             return;

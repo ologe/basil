@@ -16,15 +16,18 @@ import androidx.lifecycle.ViewModelProviders;
 import dev.olog.basil.R;
 import dev.olog.basil.presentation.base.BaseFragment;
 import dev.olog.basil.presentation.main.MainFragmentViewModel;
+import dev.olog.basil.presentation.navigator.Navigator;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 
 public class SearchFragment extends BaseFragment {
 
     private EditText editText;
     private View send;
+    private View newRecipe;
 
-    @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    @Inject Navigator navigator;
+
+    @Inject ViewModelProvider.Factory viewModelFactory;
     private MainFragmentViewModel viewModel;
 
     @Override
@@ -32,6 +35,7 @@ public class SearchFragment extends BaseFragment {
         viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(MainFragmentViewModel.class);
         editText = view.findViewById(R.id.editText);
         send = view.findViewById(R.id.send);
+        newRecipe = view.findViewById(R.id.newRecipeHeader);
     }
 
     @Override
@@ -39,6 +43,7 @@ public class SearchFragment extends BaseFragment {
         super.onResume();
         editText.setOnKeyListener(onKeyListener);
         send.setOnClickListener(v -> updateFilter());
+        newRecipe.setOnClickListener(v -> navigator.newRecipe());
     }
 
     @Override
@@ -46,6 +51,7 @@ public class SearchFragment extends BaseFragment {
         super.onPause();
         editText.setOnKeyListener(null);
         send.setOnClickListener(null);
+        newRecipe.setOnClickListener(null);
     }
 
     private View.OnKeyListener onKeyListener = (v, keyCode, event) -> {

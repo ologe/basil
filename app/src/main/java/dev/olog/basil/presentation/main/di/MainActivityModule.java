@@ -3,6 +3,7 @@ package dev.olog.basil.presentation.main.di;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import dagger.Module;
 import dagger.Provides;
 import dev.olog.basil.dagger.qualifier.ActivityContext;
@@ -26,6 +27,11 @@ public class MainActivityModule {
     @Provides
     AppCompatActivity provideActivity(){
         return activity;
+    }
+
+    @Provides
+    Lifecycle provideLifecuel() {
+        return activity.getLifecycle();
     }
 
 }

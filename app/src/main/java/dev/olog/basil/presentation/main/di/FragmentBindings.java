@@ -3,6 +3,7 @@ package dev.olog.basil.presentation.main.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import dev.olog.basil.presentation.actions.SearchFragment;
+import dev.olog.basil.presentation.createnew.NewRecipeFragment;
 import dev.olog.basil.presentation.ingredients.IngredientsFragment;
 import dev.olog.basil.presentation.main.MainFragment;
 
@@ -17,5 +18,8 @@ public abstract class FragmentBindings {
 
     @ContributesAndroidInjector
     abstract SearchFragment provideSearchFragment();
+
+    @ContributesAndroidInjector
+    abstract NewRecipeFragment provideNewRecipeFragment();
 
 }
