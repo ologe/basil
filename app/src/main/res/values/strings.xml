@@ -20,5 +20,6 @@
 
     <string name="new_recipe_created">New recipe created successfully</string>
     <string name="common_error">Something went wrong</string>
+    <string name="recipes_empty_state">No recipes found</string>
 
 </resources>

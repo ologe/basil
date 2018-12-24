@@ -60,6 +60,8 @@ public class MainFragment extends BaseFragment {
     private View ingredients;
     private View scrim;
 
+    private View emptyState;
+
     private RecyclerView recipeTitleList;
 
     private SlidingUpPanelLayout slidingPanel;
@@ -96,6 +98,7 @@ public class MainFragment extends BaseFragment {
             imageAdapter.updateDataSet(recipes);
             recipeTitleAdapter.updateDataSet(ListUtils.map(recipes, DisplayableMiniRecipe::getTitle));
             adjustDetailBorders();
+            emptyState.setVisibility(recipes.isEmpty() ? View.VISIBLE : View.GONE);
         });
 
         viewModel.observeCurrentRecipe()
@@ -120,6 +123,7 @@ public class MainFragment extends BaseFragment {
         tagsGroup = view.findViewById(R.id.tags);
         recipeTitleList = view.findViewById(R.id.titleList);
         scrim = view.findViewById(R.id.scrim);
+        emptyState = view.findViewById(R.id.emptyState);
     }
 
     private void updateCurrentRecipe(@Nullable DisplayableRecipe recipe){
