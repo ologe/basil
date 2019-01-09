@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseAdapter <T> extends RecyclerView.Adapter<BaseAdapter.DataBoundViewHolder> {
 
-    private final List<T> dataSet = new ArrayList<>();
+    protected final List<T> dataSet = new ArrayList<>();
 
     public BaseAdapter() {
     }
@@ -58,6 +58,10 @@ public abstract class BaseAdapter <T> extends RecyclerView.Adapter<BaseAdapter.D
 
     @LayoutRes
     protected abstract int provideLayoutId();
+
+    public boolean isEmpty() {
+        return dataSet.isEmpty();
+    }
 
     static class DataBoundViewHolder extends RecyclerView.ViewHolder {
 

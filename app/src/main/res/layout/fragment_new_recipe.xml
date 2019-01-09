@@ -1,161 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:background="?android:windowBackground">
+    android:layout_width="match_parent">
 
-    <ImageButton
-        android:id="@+id/back"
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:background="?android:windowBackground"
+        android:clipToPadding="false"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/vd_back"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="12dp"
-        android:tint="@color/basil_green_800"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/wrapped_add"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="72dp"/>
-
-    <TextView
-        android:id="@+id/header"
-        android:text="@string/new_recipe"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        style="@style/TextAppearance.MaterialComponents.Headline5"
-        android:fontFamily="@font/lekton"
-        android:textAllCaps="true"
-        android:textColor="@color/basil_green_800"
-        android:scaleY=".8"
-        android:scaleX=".8"
-        android:textAlignment="center"
-        android:padding="8dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameWrapper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:hint="@string/recipe_name"
-        app:layout_constraintTop_toBottomOf="@+id/header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imeOptions="actionNext" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionWrapper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="48dp"
-        android:hint="@string/recipe_description"
-        app:layout_constraintTop_toBottomOf="@+id/nameWrapper"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imeOptions="actionNext"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/caloriesWrapper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:hint="@string/recipe_calories"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper"
-        app:layout_constraintEnd_toStartOf="@id/peopleWrapper"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="8dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/calories"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            android:imeOptions="actionNext"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/peopleWrapper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:hint="@string/recipe_people"
-        app:layout_constraintTop_toTopOf="@+id/caloriesWrapper"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/caloriesWrapper"
-        android:layout_marginStart="8dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/people"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            android:imeOptions="actionDone"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <HorizontalScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/caloriesWrapper"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:overScrollMode="never"
-        android:padding="@dimen/margin_big"
-        android:paddingStart="48dp"
-        android:scrollbars="none">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/tags"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleLine="true"
-            android:requiresFadingEdge="horizontal"
-            android:layout_gravity="center_vertical">
+            android:clipToPadding="false">
 
-            <!--will be deleted at runtime-->
-            <com.google.android.material.chip.Chip
-                android:id="@+id/newTag"
-                android:text="@string/add_tag"
+            <ImageButton
+                android:id="@+id/back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/NewTagChip" />
+                android:src="@drawable/vd_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:tint="@color/basil_green_800"/>
 
-        </com.google.android.material.chip.ChipGroup>
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/wrapped_add"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="72dp"/>
 
-    </HorizontalScrollView>
+            <TextView
+                android:id="@+id/header"
+                android:text="@string/new_recipe"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:fontFamily="@font/lekton"
+                android:textAllCaps="true"
+                android:textColor="@color/basil_green_800"
+                android:scaleY=".8"
+                android:scaleX=".8"
+                android:textAlignment="center"
+                android:padding="8dp"/>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:hint="@string/recipe_name"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:imeOptions="actionNext" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="48dp"
+                android:hint="@string/recipe_description"
+                app:layout_constraintTop_toBottomOf="@+id/nameWrapper"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/peopleWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:hint="@string/recipe_people"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionWrapper"
+                app:layout_constraintEnd_toStartOf="@+id/caloriesWrapper"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="48dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/people"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/caloriesWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:hint="@string/recipe_calories"
+                app:layout_constraintTop_toTopOf="@+id/peopleWrapper"
+                app:layout_constraintStart_toEndOf="@id/peopleWrapper"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="48dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/calories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/tagsWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/caloriesWrapper"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/margin_big"
+                android:paddingStart="48dp"
+                android:paddingBottom="@dimen/margin_big"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true"
+                    android:requiresFadingEdge="horizontal"
+                    android:layout_gravity="center_vertical"/>
+
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/changeImage"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                app:layout_constraintStart_toStartOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="@+id/image"
+                app:layout_constraintBottom_toBottomOf="@+id/image"
+                android:background="@drawable/vd_add_photo"
+                android:layout_width="49dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <ImageView
+                android:id="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/tagsWrapper"
+                app:layout_constraintStart_toStartOf="@id/nameWrapper"
+                app:layout_constraintEnd_toEndOf="@id/nameWrapper"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintDimensionRatio="1.8"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:clickable="false"
+                android:focusable="false"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredientsList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="72dp"
+                android:layout_marginStart="8dp"
+                tools:listitem="@layout/item_ingredient"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save"
@@ -166,8 +216,30 @@
         android:layout_margin="@dimen/margin_big"
         app:fabSize="normal"
         android:src="@drawable/vd_hot"
+        android:tint="#EFFF" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:layout_constraintEnd_toEndOf="@id/save"
+        app:layout_constraintStart_toStartOf="@id/save"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/vd_add_tag"
         android:tint="#EFFF"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        app:fabSize="mini"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/addTag"
+        app:layout_constraintEnd_toEndOf="@id/save"
+        app:layout_constraintStart_toStartOf="@id/save"
+        android:layout_marginBottom="8dp"
+        android:tint="#EFFF"
+        android:src="@drawable/vd_add_ingredient"
+        app:fabSize="mini"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

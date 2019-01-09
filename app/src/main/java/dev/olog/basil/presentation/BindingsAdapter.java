@@ -11,16 +11,8 @@ public class BindingsAdapter {
 
     @BindingAdapter(value = "loadRecipeImage")
     public static void loadRecipeImage(ImageView imageView, DisplayableMiniRecipe recipe){
-        int imageName;
-        if (recipe.getId() % 2 == 0){
-            imageName = R.drawable.pasta;
-        } else {
-            imageName = R.drawable.salmon;
-        }
-
-//        imageView.setImageResource(imageName);
         GlideApp.with(imageView.getContext())
-                .load(imageName)
+                .load(recipe.getImage())
                 .into(imageView);
     }
 

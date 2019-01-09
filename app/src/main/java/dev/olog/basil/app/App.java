@@ -21,7 +21,7 @@ public class App extends DaggerApplication {
 
     private void initialize(){
         if (BuildConfig.DEBUG){
-            gateway.populateIfEmpty();
+//            gateway.populateIfEmpty();
             Stetho.initializeWithDefaults(this);
         }
     }

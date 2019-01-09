@@ -1,10 +1,8 @@
-package dev.olog.basil.presentation.actions;
+package dev.olog.basil.presentation.search;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import javax.inject.Inject;

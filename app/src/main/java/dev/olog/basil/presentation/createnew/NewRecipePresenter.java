@@ -1,6 +1,7 @@
 package dev.olog.basil.presentation.createnew;
 
 import android.content.Context;
+import android.net.Uri;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -22,6 +23,8 @@ public class NewRecipePresenter implements DefaultLifecycleObserver {
     private Disposable disposable;
     private Context context;
     private final RecipeGateway recipeRepository;
+
+    private Uri image = null;
 
     @Inject NewRecipePresenter(@ApplicationContext Context context,
                                Lifecycle lifecycle,
@@ -51,6 +54,18 @@ public class NewRecipePresenter implements DefaultLifecycleObserver {
                     throwable.printStackTrace();
                     Toast.makeText(context, R.string.common_error, Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    public void setImage(Uri image){
+        this.image = image;
+    }
+
+    public boolean isImageSet(){
+        return image != null;
+    }
+
+    public Uri getImage(){
+        return image;
     }
 
 }
