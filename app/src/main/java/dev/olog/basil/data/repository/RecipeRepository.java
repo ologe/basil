@@ -64,25 +64,25 @@ public class RecipeRepository implements RecipeGateway {
         );
     }
 
-//    @Override
-//    public void populateIfEmpty() {
-////        recipesDao.deleteAll();
-//
-//        if (observeAll().blockingFirst().isEmpty()){
-//            List<RecipeEntity> recipes = Observable.range(1, 10)
-//                .map(FakeEntityFactory::mockRecipe)
-//                .toList()
-//                .blockingGet();
-//            recipesDao.insertGroup(recipes);
-//
-//            for (RecipeEntity recipe : recipes) {
-//                ingredientsDao.insertGroup(FakeEntityFactory.mockIngredientsForRecipe(recipe.getId()));
-//                tagsDao.insertGroup(FakeEntityFactory.mockTagsForRecipe(recipe.getId()));
-//                imagesDao.insertGroup(FakeEntityFactory.mockImagesForRecipe(recipe.getId()));
-//            }
-//
-//        }
-//    }
+    @Override
+    public void populateIfEmpty() {
+//        recipesDao.deleteAll();
+
+        if (observeAll().blockingFirst().isEmpty()){
+            List<RecipeEntity> recipes = Observable.range(1, 2)
+                .map(FakeEntityFactory::mockRecipe)
+                .toList()
+                .blockingGet();
+            recipesDao.insertGroup(recipes);
+
+            for (RecipeEntity recipe : recipes) {
+                ingredientsDao.insertGroup(FakeEntityFactory.mockIngredientsForRecipe(recipe.getId()));
+                tagsDao.insertGroup(FakeEntityFactory.mockTagsForRecipe(recipe.getId()));
+                imagesDao.insertGroup(FakeEntityFactory.mockImagesForRecipe(recipe.getId()));
+            }
+
+        }
+    }
 
     @Override
     public Completable saveRecipe(Recipe recipe) {

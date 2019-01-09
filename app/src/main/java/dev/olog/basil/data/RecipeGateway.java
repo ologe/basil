@@ -11,7 +11,7 @@ public interface RecipeGateway {
     Flowable<List<Recipe>> observeAll();
     Flowable<Recipe> observeById(long id);
 
-//    void populateIfEmpty();
+    void populateIfEmpty();
 
     Completable saveRecipe(Recipe recipe);
 }

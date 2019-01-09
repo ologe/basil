@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,8 +192,12 @@ public class NewRecipeFragment extends BaseFragment implements DrawsOnTop {
     }
 
     private void addIngredient(String name, String quantity){
-        Ingredient ingredient = new Ingredient(0, name, Integer.parseInt(quantity), adapter.getItemCount() + 1);
-        adapter.addIngredient(ingredient);
+        if (TextUtils.isDigitsOnly(quantity)){
+            Ingredient ingredient = new Ingredient(0, name, Integer.parseInt(quantity), adapter.getItemCount() + 1);
+            adapter.addIngredient(ingredient);
+        } else {
+            Toast.makeText(requireContext(), "Quantity not valid", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
