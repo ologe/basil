@@ -11,7 +11,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_very_big">
 
         <dev.olog.basil.presentation.widget.ParallaxTextView
             android:id="@+id/title"
@@ -22,8 +25,8 @@
             android:layout_gravity="center"
             style="@style/RecipeHeader"
             android:paddingTop="42dp"
-            android:paddingBottom="@dimen/margin_very_big"
-            app:autoSizeMinTextSize="60dp"/>
+            app:autoSizeMinTextSize="40dp"
+            android:maxLines="2"/>
 
     </FrameLayout>
 
