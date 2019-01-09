@@ -88,13 +88,15 @@ public class NewRecipeFragment extends BaseFragment implements DrawsOnTop {
                 return;
             }
 
-            List<Ingredient> ingredients = new ArrayList<>();
+            List<Ingredient> ingredients = adapter.getDataSet();
+
             List<Tag> tags = new ArrayList<>();
             for (int i = 0; i < this.tags.getChildCount(); i++) {
                 tags.add(new Tag(0, ((Chip) this.tags.getChildAt(i)).getText().toString()));
             }
             List<String> images = new ArrayList<>();
             images.add(presenter.getImage().toString());
+
             int calories = TextUtils.isEmpty(recipeCalories.getText().toString()) ? 0 :
                     Integer.parseInt(recipeCalories.getText().toString());
             presenter.saveRecipe(new Recipe(

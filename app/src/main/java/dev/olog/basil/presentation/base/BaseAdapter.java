@@ -77,4 +77,8 @@ public abstract class BaseAdapter <T> extends RecyclerView.Adapter<BaseAdapter.D
         }
     }
 
+    public List<T> getDataSet(){
+        return new ArrayList<>(dataSet);
+    }
+
 }
