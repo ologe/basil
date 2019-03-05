@@ -3,14 +3,18 @@
 
     <item>
         <shape android:shape="oval" android:thickness="1dp">
-            <stroke android:width="2.5dp"
+            <stroke android:width="2dp"
                 android:color="@color/basil_green_800">
 
             </stroke>
         </shape>
     </item>
 
-    <item android:drawable="@drawable/vd_add">
+    <item android:drawable="@drawable/vd_bookmark"
+        android:top="@dimen/wrapped_bookmark_padding"
+        android:bottom="@dimen/wrapped_bookmark_padding"
+        android:left="@dimen/wrapped_bookmark_padding"
+        android:right="@dimen/wrapped_bookmark_padding">
         <color android:color="@color/basil_green_800"/>
     </item>
 

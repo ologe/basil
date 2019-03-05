@@ -23,7 +23,7 @@
         tools:visibility="visible"/>
 
     <dev.olog.basil.presentation.widget.NoScrollRecyclerView
-        android:id="@+id/titleList"
+        android:id="@+id/titleOnlyList"
         android:layout_width="0dp"
         android:layout_height="@dimen/panel_height"
         tools:listitem="@layout/item_recipe_title"
@@ -46,7 +46,7 @@
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/arrow"
@@ -75,22 +75,22 @@
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/margin_mid"
-        android:layout_marginEnd="@dimen/margin_mid"
-        android:layout_marginBottom="@dimen/margin_mid"
+        android:layout_marginStart="@dimen/margin_very_big"
+        android:layout_marginEnd="@dimen/margin_very_big"
+        android:layout_marginBottom="@dimen/margin_very_big"
         app:layout_constraintBottom_toBottomOf="@+id/scrim"
         app:layout_constraintEnd_toEndOf="@+id/scrim"
         app:layout_constraintStart_toStartOf="@+id/scrim"
         app:layout_constraintTop_toBottomOf="@+id/recipeHeader"
-        app:fontFamily="@font/lekton"
+        app:fontFamily="@font/lekton_bold"
         tools:text="@tools:sample/lorem"
         android:textColor="@color/basil_green_800"
         style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textStyle="bold"
         app:autoSizeTextType="uniform"
-        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeMaxTextSize="26sp"
         app:autoSizeMinTextSize="20sp"
         android:textAlignment="center"
+        android:gravity="center"
         android:ellipsize="end"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,31 +101,41 @@
         app:layout_constraintStart_toStartOf="@id/scrim"
         app:layout_constraintEnd_toEndOf="@id/scrim"
         app:layout_constraintBottom_toTopOf="@+id/bottomWrapper"
-        android:layout_marginTop="@dimen/margin_big">
+        android:layout_marginTop="36dp">
 
         <TextView
             android:id="@+id/caloriesHeader"
-            android:text="@string/calories"
+            android:text="Calories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/peopleHeader"
+            app:layout_constraintEnd_toStartOf="@+id/proteinHeader"
             style="@style/RecipeDescriptionHeader" />
 
         <TextView
-            android:id="@+id/peopleHeader"
-            android:text="@string/people"
+            android:id="@+id/proteinHeader"
+            android:text="Protein"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@+id/caloriesHeader"
             app:layout_constraintStart_toEndOf="@+id/caloriesHeader"
+            app:layout_constraintEnd_toStartOf="@id/fatHeader"
+            style="@style/RecipeDescriptionHeader"/>
+
+        <TextView
+            android:id="@+id/fatHeader"
+            android:text="Fat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/caloriesHeader"
+            app:layout_constraintStart_toEndOf="@+id/proteinHeader"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/RecipeDescriptionHeader"/>
 
         <TextView
             android:id="@+id/calories"
-            tools:text="465"
+            tools:text="465g"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/RecipeDescription"
@@ -134,52 +144,85 @@
             app:layout_constraintEnd_toEndOf="@+id/caloriesHeader" />
 
         <TextView
-            android:id="@+id/people"
-            tools:text="4"
+            android:id="@+id/protein"
+            tools:text="4g"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/RecipeDescription"
             app:layout_constraintTop_toTopOf="@+id/calories"
-            app:layout_constraintStart_toStartOf="@+id/peopleHeader"
-            app:layout_constraintEnd_toEndOf="@+id/peopleHeader" />
+            app:layout_constraintStart_toStartOf="@+id/proteinHeader"
+            app:layout_constraintEnd_toEndOf="@+id/proteinHeader" />
+
+        <TextView
+            android:id="@+id/fat"
+            tools:text="4g"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/RecipeDescription"
+            app:layout_constraintTop_toTopOf="@+id/calories"
+            app:layout_constraintStart_toStartOf="@+id/fatHeader"
+            app:layout_constraintEnd_toEndOf="@+id/fatHeader" />
 
         <View
             android:id="@+id/midDivider"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             app:layout_constraintTop_toBottomOf="@+id/calories"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_very_big"
             style="@style/Divider"/>
 
-        <HorizontalScrollView
-            android:layout_width="0dp"
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="1dp"
             android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/caloriesHeader"
+            app:layout_constraintStart_toEndOf="@id/caloriesHeader"
+            app:layout_constraintEnd_toStartOf="@id/proteinHeader"
+            app:layout_constraintBottom_toBottomOf="@+id/calories"
+            style="@style/Divider"
+            android:alpha=".6" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/caloriesHeader"
+            app:layout_constraintStart_toEndOf="@id/proteinHeader"
+            app:layout_constraintEnd_toStartOf="@id/fatHeader"
+            app:layout_constraintBottom_toBottomOf="@+id/calories"
+            style="@style/Divider"
+            android:alpha=".6"/>
+
+        <com.google.android.material.chip.ChipGroup
             app:layout_constraintTop_toBottomOf="@+id/midDivider"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="50dp"
+            android:layout_marginTop="@dimen/margin_big">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/tags"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/glutenFree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleLine="true"
-                android:requiresFadingEdge="horizontal"
-                android:layout_gravity="center_vertical">
+                android:text="Gluten-free"
+                app:chipIcon="@drawable/vd_gluten_free"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-                <!--will be deleted at runtime-->
-                <com.google.android.material.chip.Chip
-                    android:text="@string/app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/eggFree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Egg Free"
+                app:chipIcon="@drawable/vd_egg_free"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
-            </com.google.android.material.chip.ChipGroup>
-
-        </HorizontalScrollView>
+        </com.google.android.material.chip.ChipGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -198,16 +241,29 @@
             app:layout_constraintBottom_toTopOf="@+id/ingredients"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/basil_green_800"/>
+            android:background="@color/basil_green_800"
+            android:alpha=".4"/>
 
         <TextView
             android:id="@+id/ingredients"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/directions"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:text="Ingredients"
+            android:gravity="center"
+            android:textColor="@color/basil_green_800"
+            android:textAppearance="@style/Button" />
+
+        <TextView
+            android:id="@+id/directions"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ingredients"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:text="@string/ingredients"
+            android:text="Directions"
             android:gravity="center"
             android:textColor="@color/basil_green_800"
             android:textAppearance="@style/Button" />

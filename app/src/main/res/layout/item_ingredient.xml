@@ -6,7 +6,8 @@
     <data>
         <variable
             name="item"
-            type="dev.olog.basil.presentation.model.DisplayableIngredient"/>
+            type="dev.olog.basil.model.Ingredient"/>
+        <import type="java.lang.String"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +39,7 @@
         <TextView
             android:id="@+id/quantity"
             tools:text="6"
-            android:text="@{item.quantity}"
+            android:text="@{String.valueOf(item.quantity) + ` tbps`}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@+id/ingredient"

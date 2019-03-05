@@ -9,7 +9,6 @@
         <item name="android:statusBarColor">@color/status_bar_color</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="chipStyle">@style/TagChip</item>
         <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.FilledBox</item>
 
         <item name="textAppearanceHeadline1">@style/Headline1</item>
@@ -25,6 +24,7 @@
         <item name="textAppearanceButton">@style/Button</item>
         <item name="textAppearanceCaption">@style/Caption</item>
         <item name="textAppearanceOverline">@style/Overline</item>
+        <item name="chipStyle">@style/Chip</item>
     </style>
 
 </resources>

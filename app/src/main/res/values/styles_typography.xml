@@ -5,11 +5,21 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/basil_green_800</item>
         <item name="android:letterSpacing">0.1</item>
+        <item name="android:textSize">70sp</item>
     </style>
 
 
     <style name="Header" parent="TextAppearance.MaterialComponents.Headline4">
 
+    </style>
+
+    <style name="HeaderSmall" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="RecipeHeader" parent="Headline1">
@@ -22,12 +32,15 @@
         <item name="fontFamily">@font/lekton_bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="RecipeDescriptionHeader" parent="Subtitle1">
         <item name="fontFamily">@font/lekton</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/basil_green_500</item>
+        <item name="android:textColor">@color/basil_green_800</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <!--common typography-->
@@ -84,7 +97,7 @@
     </style>
 
     <style name="Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="fontFamily">@font/montserrat</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
     </style>

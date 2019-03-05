@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/wrapped_gluten_padding"
+        android:drawable="@drawable/vd_branch"
+        android:left="@dimen/wrapped_gluten_padding"
+        android:right="@dimen/wrapped_gluten_padding"
+        android:top="@dimen/wrapped_gluten_padding">
+        <color android:color="@color/basil_green_800" />
+    </item>
+
+    <item>
+        <shape
+            android:shape="oval"
+            android:thickness="1dp">
+            <stroke
+                android:width="2dp"
+                android:color="@color/basil_orange">
+
+            </stroke>
+        </shape>
+    </item>
+
+    <item>
+        <rotate
+            android:fromDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="0">
+            <shape
+                android:shape="line"
+                android:top="1dip">
+                <stroke
+                    android:width="3dp"
+                    android:color="@color/basil_orange" />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

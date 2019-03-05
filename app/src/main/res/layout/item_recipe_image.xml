@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="recipe"
-            type="dev.olog.basil.presentation.model.DisplayableMiniRecipe"/>
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +12,6 @@
         <dev.olog.basil.presentation.widget.ParallaxScrimImageView
             android:id="@+id/image"
             tools:src="@drawable/pasta"
-            app:loadRecipeImage="@{recipe}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -27,8 +21,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintDimensionRatio="1"
-            android:layout_marginStart="@dimen/margin_mid"
-            android:layout_marginEnd="@dimen/margin_mid"/>
+            android:layout_marginStart="@dimen/recipe_margin"
+            android:layout_marginEnd="@dimen/recipe_margin"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

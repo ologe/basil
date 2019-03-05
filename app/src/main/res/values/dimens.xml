@@ -7,8 +7,11 @@
     <dimen name="margin_big">16dp</dimen>
     <dimen name="margin_very_big">24dp</dimen>
 
+    <dimen name="recipe_margin">@dimen/margin_mid</dimen>
 
     <dimen name="panel_height">200dp</dimen>
 
-    <dimen name="wrapped_search_padding">8dp</dimen>
+    <dimen name="wrapped_bookmark_padding">12dp</dimen>
+    <dimen name="wrapped_egg_padding">2dp</dimen>
+    <dimen name="wrapped_gluten_padding">2dp</dimen>
 </resources>

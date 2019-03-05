@@ -1,6 +1,6 @@
 package dev.olog.basil.presentation.base;
 
-import dagger.android.support.DaggerAppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public abstract class BaseActivity extends DaggerAppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 }

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
 
@@ -58,11 +60,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:$rootProject.lifecycle"
+    kapt 'com.android.databinding:compiler:3.3.1'
 
 //    support
     implementation "androidx.core:core:1.0.1"
@@ -71,23 +69,12 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.androidX"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout"
 
-//    room
-    implementation "androidx.room:room-runtime:$rootProject.room"
-    annotationProcessor "androidx.room:room-compiler:$rootProject.room"
-    implementation "androidx.room:room-rxjava2:$rootProject.room"
-
-//    dagger
-    implementation "com.google.dagger:dagger:$rootProject.dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
-    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
-
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android"
     implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rx_binding"
-    implementation "com.github.dmstocking:support-optional:1.2"
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+
 
 //    sliding panel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
