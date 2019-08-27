@@ -3,4 +3,6 @@ apply from: '../base_module.gradle'
 
 dependencies {
     implementation lib_core.dagger
+
+    implementation lib_x.material
 }
