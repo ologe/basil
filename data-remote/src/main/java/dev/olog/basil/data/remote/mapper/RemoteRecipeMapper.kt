@@ -5,14 +5,12 @@ import dev.olog.basil.core.Recipe
 import dev.olog.basil.core.RecipeCategory
 import dev.olog.basil.data.remote.model.SpoonacularRecipe
 
-private const val MAX_IMAGE_SIZE = "636x393"
-
 // https://spoonacular.com/food-api/docs#Show-Images
 internal fun SpoonacularRecipe.toDomain(): Recipe {
     return Recipe(
         id = this.id,
         name = this.title,
-        description = "Description",
+        description = this.instructions,
         allergens = Allergens(
             dairyFree = this.dairyFree,
             glutenFree = this.glutenFree,
