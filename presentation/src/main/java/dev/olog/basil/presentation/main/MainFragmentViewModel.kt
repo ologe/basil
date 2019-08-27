@@ -10,7 +10,6 @@ import dev.olog.basil.core.RecipeCategory
 import dev.olog.basil.core.RecipeGateway
 import dev.olog.basil.presentation.utils.map
 import dev.olog.basil.presentation.utils.switchMap
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ class MainFragmentViewModel @Inject constructor(
 
     private val recipesLiveData = MutableLiveData<List<Recipe>>()
 
-    private val currentRecipeIndexPublisher = ConflatedBroadcastChannel(0)
+    private val currentRecipeLiveData = MutableLiveData(0)
 
     private val currentRecipeCategoryPublisher = MutableLiveData(RecipeCategory.Entree)
 
@@ -38,7 +37,7 @@ class MainFragmentViewModel @Inject constructor(
     fun observeCurrentRecipeCategory(): LiveData<RecipeCategory> = currentRecipeCategoryPublisher
 
     fun updatePosition(position: Int) {
-        currentRecipeIndexPublisher.offer(position)
+        currentRecipeLiveData.value = position
     }
 
     fun observeRecipes(): LiveData<List<Recipe>> {
@@ -48,8 +47,8 @@ class MainFragmentViewModel @Inject constructor(
     }
 
     fun observeCurrentRecipe(): LiveData<Recipe?> {
-        return recipesLiveData.map {
-            it.getOrNull(currentRecipeIndexPublisher.value)
+        return currentRecipeLiveData.switchMap { index ->
+            recipesLiveData.map { it.getOrNull(index) }
         }
     }
 

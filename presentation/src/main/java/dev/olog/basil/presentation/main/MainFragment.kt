@@ -94,9 +94,6 @@ class MainFragment : BaseFragment() {
     private fun updateCurrentRecipe(recipe: Recipe?) {
         if (recipe != null) {
             description.text = recipe.description
-//            calories.text = "${recipe.macros.calories}g"
-//            protein.text = "${recipe.macros.proteins}g"
-//            fat.text = "${recipe.macros.fat}g"
             glutenFree.toggleVisibility(recipe.allergens.glutenFree)
             eggFree.toggleVisibility(recipe.allergens.dairyFree)
         }
