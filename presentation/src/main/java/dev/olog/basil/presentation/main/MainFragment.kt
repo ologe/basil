@@ -5,6 +5,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.math.MathUtils
 import androidx.core.view.doOnPreDraw
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.COLLAPSED
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.HIDDEN
-import dev.olog.basil.presentation.R
 import dev.olog.basil.core.Recipe
+import dev.olog.basil.presentation.R
 import dev.olog.basil.presentation.base.BaseFragment
 import dev.olog.basil.presentation.base.ImageModel
 import dev.olog.basil.presentation.detail.RecipeDetailFragment
+import dev.olog.basil.presentation.utils.activityViewModelProvider
+import dev.olog.basil.presentation.utils.subscribe
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView
 import dev.olog.basil.shared.lazyFast
 import dev.olog.basil.shared.statusBarHeight
@@ -27,16 +30,19 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.item_recipe_image.view.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 class MainFragment : BaseFragment() {
+
+    @Inject
+    internal lateinit var factory: ViewModelProvider.Factory
 
     private val panelListener by lazyFast { SlidingPanelListener() }
     private val onScrollListener by lazyFast { OnScrollListener() }
 
-    private val viewModel by lazyFast { (requireActivity() as MainActivity).viewModel }
+    private val viewModel by lazyFast {
+        activityViewModelProvider<MainFragmentViewModel>(factory)
+    }
     private val recipeImagesAdapter by lazyFast { RecipesViewPagerAdapter() }
     private val recipeImageLayoutManager by lazy {
         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -58,19 +64,17 @@ class MainFragment : BaseFragment() {
         viewModel.updatePosition(0)
 
         viewModel.observeRecipes()
-                .onEach { recipes ->
-                    recipeImagesAdapter.updateDataSet(recipes.mapIndexed { index, recipe -> ImageModel(index, R.layout.item_recipe_image, recipe.image) })
-                    recipeTitlesAdapter.updateDataSet(recipes.mapIndexed { index, recipe -> TitleModel(index, R.layout.item_recipe_title, recipe.name) })
-                    adjustDetailBorders()
-                    emptyState.visibility = if (recipes.isEmpty()) View.VISIBLE else View.GONE
-                }
-                .catch { it.printStackTrace() }
-                .launchIn(this)
+            .subscribe(viewLifecycleOwner) { recipes ->
+                recipeImagesAdapter.updateDataSet(recipes.mapIndexed { index, recipe -> ImageModel(index, R.layout.item_recipe_image, recipe.image) })
+                recipeTitlesAdapter.updateDataSet(recipes.mapIndexed { index, recipe -> TitleModel(index, R.layout.item_recipe_title, recipe.name) })
+                adjustDetailBorders()
+                emptyState.visibility = if (recipes.isEmpty()) View.VISIBLE else View.GONE
+            }
 
         viewModel.observeCurrentRecipe()
-                .onEach { updateCurrentRecipe(it) }
-                .catch { it.printStackTrace() }
-                .launchIn(this)
+            .subscribe(viewLifecycleOwner) {
+                updateCurrentRecipe(it)
+            }
     }
 
     override fun onResume() {
@@ -90,11 +94,11 @@ class MainFragment : BaseFragment() {
     private fun updateCurrentRecipe(recipe: Recipe?) {
         if (recipe != null) {
             description.text = recipe.description
-            calories.text = "${recipe.macros.calories}g"
-            protein.text = "${recipe.macros.proteins}g"
-            fat.text = "${recipe.macros.fat}g"
+//            calories.text = "${recipe.macros.calories}g"
+//            protein.text = "${recipe.macros.proteins}g"
+//            fat.text = "${recipe.macros.fat}g"
             glutenFree.toggleVisibility(recipe.allergens.glutenFree)
-            eggFree.toggleVisibility(recipe.allergens.eggFree)
+            eggFree.toggleVisibility(recipe.allergens.dairyFree)
         }
     }
 

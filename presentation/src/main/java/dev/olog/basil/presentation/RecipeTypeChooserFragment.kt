@@ -4,21 +4,25 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import dev.olog.basil.presentation.R
+import androidx.lifecycle.ViewModelProvider
 import dev.olog.basil.core.RecipeCategory
 import dev.olog.basil.presentation.base.BaseFragment
-import dev.olog.basil.presentation.main.MainActivity
+import dev.olog.basil.presentation.main.MainFragmentViewModel
+import dev.olog.basil.presentation.utils.activityViewModelProvider
+import dev.olog.basil.presentation.utils.subscribe
+import dev.olog.basil.shared.lazyFast
 import dev.olog.basil.shared.toggleVisibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recipe_type_chooser.*
 import kotlinx.android.synthetic.main.fragment_recipe_type_chooser.view.*
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 class RecipeTypeChooserFragment : BaseFragment() {
 
-    private val viewModel by lazy { (requireActivity() as MainActivity).viewModel }
+    @Inject
+    internal lateinit var factory: ViewModelProvider.Factory
+
+    private val viewModel by lazyFast { activityViewModelProvider<MainFragmentViewModel>(factory) }
 
     private var categories = mutableMapOf<RecipeCategory, TextView>()
     private var categoriesUnderline = mutableMapOf<RecipeCategory, View>()
@@ -37,9 +41,9 @@ class RecipeTypeChooserFragment : BaseFragment() {
         categoriesUnderline[RecipeCategory.Cocktail] = view.cocktailsLine
 
         viewModel.observeCurrentRecipeCategory()
-            .onEach { updateVisibleHeader(it) }
-            .catch { it.printStackTrace() }
-            .launchIn(this)
+            .subscribe(viewLifecycleOwner) {
+                updateVisibleHeader(it)
+            }
     }
 
     override fun onResume() {
@@ -58,7 +62,7 @@ class RecipeTypeChooserFragment : BaseFragment() {
         cocktailsHeader.setOnClickListener(null)
     }
 
-    private fun updateVisibleHeader(category: RecipeCategory){
+    private fun updateVisibleHeader(category: RecipeCategory) {
         // workaround to remove bold and keep textview style
         val baseTypeFace = categories.entries.first { it.key == category }.value.typeface
 

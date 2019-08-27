@@ -13,14 +13,11 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            useProguard true
-            multiDexEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled false
-            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationIdSuffix ".debug"
 //            debuggable false
@@ -39,9 +36,6 @@ dependencies {
 
     implementation lib_core.dagger
     kapt lib_core.dagger_processor
-    implementation lib_core.dagger_android
-    implementation lib_core.dagger_android_support
-    kapt lib_core.dagger_android_processor
 
     implementation lib_ui.glide
 
@@ -52,7 +46,6 @@ dependencies {
     implementation lib_x.coordinator
     implementation lib_x.fragments
 
-//    sliding panel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
 //    glide

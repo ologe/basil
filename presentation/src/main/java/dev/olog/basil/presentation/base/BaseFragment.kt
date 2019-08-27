@@ -7,12 +7,12 @@ import android.view.ViewGroup
 
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
+import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 
-abstract class BaseFragment : Fragment(), CoroutineScope by MainScope() {
+abstract class BaseFragment : DaggerFragment(), CoroutineScope by MainScope() {
 
     @CallSuper
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

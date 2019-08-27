@@ -1,0 +1,18 @@
+apply plugin: 'com.android.library'
+apply from: '../base_module.gradle'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation project(':core')
+    implementation project(':data')
+    implementation project(':data-local')
+    implementation project(':data-remote')
+    implementation project(':shared')
+
+    implementation lib_core.dagger
+    kapt lib_core.dagger_processor
+
+    implementation lib_network.ok_http
+    implementation lib_network.retrofit
+    implementation lib_data.room
+}

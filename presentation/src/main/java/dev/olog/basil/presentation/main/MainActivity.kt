@@ -1,21 +1,25 @@
 package dev.olog.basil.presentation.main
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
-import dev.olog.basil.presentation.R
 import dev.olog.basil.presentation.DrawsOnTop
+import dev.olog.basil.presentation.R
 import dev.olog.basil.presentation.base.BaseActivity
 import dev.olog.basil.presentation.collapse
-import dev.olog.basil.shared.lazyFast
+import dev.olog.basil.presentation.main.di.inject
 import dev.olog.basil.presentation.topMostFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-    val viewModel by lazyFast { MainFragmentViewModel() }
+    @Inject
+    internal lateinit var factory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -36,10 +40,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun findSlidingPanel(): SlidingUpPanelLayout? {
-        return supportFragmentManager.fragments
-                .find { it is MainFragment }
-                ?.view
-                ?.findViewById(R.id.slidingPanel)
+        return findViewById(R.id.slidingPanel)
     }
 
 }

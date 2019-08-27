@@ -1,47 +1,60 @@
 package dev.olog.basil.presentation.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.olog.basil.core.Ingredient
 import dev.olog.basil.core.Recipe
 import dev.olog.basil.core.RecipeCategory
-import dev.olog.basil.presentation.RecipeFactory
+import dev.olog.basil.core.RecipeGateway
+import dev.olog.basil.presentation.utils.map
+import dev.olog.basil.presentation.utils.switchMap
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainFragmentViewModel {
+class MainFragmentViewModel @Inject constructor(
+    private val gateway: RecipeGateway
+) : ViewModel() {
 
-    private val recipesPublisher = ConflatedBroadcastChannel(RecipeFactory.get())
+    private val recipesLiveData = MutableLiveData<List<Recipe>>()
+
     private val currentRecipeIndexPublisher = ConflatedBroadcastChannel(0)
 
-    private val currentRecipeCategoryPublisher = ConflatedBroadcastChannel(RecipeCategory.Entree)
+    private val currentRecipeCategoryPublisher = MutableLiveData(RecipeCategory.Entree)
 
-    fun updateVisibleCategory(category: RecipeCategory) {
-        currentRecipeCategoryPublisher.offer(category)
+    init {
+        viewModelScope.launch {
+            val data = gateway.getAll()
+            recipesLiveData.value = data
+        }
     }
 
-    fun observeCurrentRecipeCategory(): Flow<RecipeCategory> = currentRecipeCategoryPublisher.asFlow()
+    fun updateVisibleCategory(category: RecipeCategory) {
+        currentRecipeCategoryPublisher.value = category
+    }
+
+    fun observeCurrentRecipeCategory(): LiveData<RecipeCategory> = currentRecipeCategoryPublisher
 
     fun updatePosition(position: Int) {
         currentRecipeIndexPublisher.offer(position)
     }
 
-    fun observeRecipes(): Flow<List<Recipe>> {
-        return currentRecipeCategoryPublisher.asFlow()
-                .flatMapLatest { category ->
-                    recipesPublisher.asFlow()
-                            .map { recipes -> recipes.filter { it.category == category } }
-                }
+    fun observeRecipes(): LiveData<List<Recipe>> {
+        return currentRecipeCategoryPublisher.switchMap { category ->
+            recipesLiveData.map { it.filter { it.category == category } }
+        }
     }
 
-    fun observeCurrentRecipe(): Flow<Recipe> {
-        return recipesPublisher.asFlow()
-                .map { recipes -> recipes[currentRecipeIndexPublisher.value] }
+    fun observeCurrentRecipe(): LiveData<Recipe?> {
+        return recipesLiveData.map {
+            it.getOrNull(currentRecipeIndexPublisher.value)
+        }
     }
 
-    fun observeCurrentIngredients(): Flow<List<Ingredient>> {
-        return observeCurrentRecipe().map { it.ingredients }
+    fun observeCurrentIngredients(): LiveData<List<Ingredient>> {
+        return observeCurrentRecipe().map { it?.ingredients ?: emptyList() }
     }
 
 }

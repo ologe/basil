@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply from: '../base_module.gradle'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    buildTypes {
+        release {
+            buildConfigField 'String', "SPOONACULAR_KEY", spoonacular_key
+        }
+        debug {
+            buildConfigField 'String', "SPOONACULAR_KEY", spoonacular_key
+        }
+    }
+}
+
+apply from: '../kapt.gradle'
+
+dependencies {
+    implementation project(':core')
+    implementation project(':shared')
+
+    implementation lib_core.dagger
+    kapt lib_core.dagger_processor
+
+    implementation lib_network.gson
+    implementation lib_network.retrofit
+    implementation lib_network.retrofit_gson
+    implementation lib_network.ok_http
+    implementation lib_network.ok_http_interceptor
+}
