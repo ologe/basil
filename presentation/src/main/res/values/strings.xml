@@ -1,0 +1,32 @@
+<resources>
+    <string name="ingredients">Ingredients</string>
+    <string name="calories">Calories</string>
+    <string name="people">People</string>
+    <string name="fat">Fat</string>
+
+    <string name="shopping_list">Shopping list</string>
+    <string name="search_hint">Recipe, ingredients or tags</string>
+    <string name="new_recipe">New recipe</string>
+    <string name="recipe_name">Name</string>
+    <string name="recipe_description">Description</string>
+    <string name="recipe_calories">Calories</string>
+    <string name="recipe_people">People</string>
+    <string name="add_tag">Add tag</string>
+    <string name="add_ingredient">Add Ingredient</string>
+    <string name="tag_name">Tag name</string>
+
+    <string name="popup_add">Add</string>
+    <string name="popup_cancel">Cancel</string>
+
+    <string name="new_recipe_created">New recipe created successfully</string>
+    <string name="common_error">Something went wrong</string>
+    <string name="recipes_empty_state">No recipes found</string>
+
+    <string name="ingredient">Ingredient</string>
+    <string name="quantity">Quantity</string>
+    <string name="need_recipe_name">Provide first a recipe name</string>
+    <string name="need_recipe_description">Provide first a recipe description</string>
+    <string name="need_recipe_people">Provide first number of people</string>
+    <string name="need_recipe_ingredient">Provide at least one ingredient</string>
+    <string name="need_recipe_image">Provide an image</string>
+</resources>

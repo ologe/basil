@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+apply from: '../base_module.gradle'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"
+                ]
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            buildConfigField 'String', "SPOONACULAR_KEY", spoonacular_key
+        }
+        debug {
+            buildConfigField 'String', "SPOONACULAR_KEY", spoonacular_key
+        }
+    }
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+}
+
+apply from: '../kapt.gradle'
+
+dependencies {
+    implementation project(':core')
+}
