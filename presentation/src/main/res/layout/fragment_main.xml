@@ -15,7 +15,8 @@
         app:umanoFadeColor="@android:color/transparent"
         app:umanoInitialState="collapsed"
         app:umanoClipPanel="false"
-        android:id="@+id/slidingPanel">
+        android:id="@+id/slidingPanel"
+        tools:layout_marginBottom="@dimen/panel_height">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,15 +51,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/item_recipe_image"
                 android:orientation="horizontal"
-                tools:layout_marginBottom="@dimen/panel_height"
-                android:layout_marginTop="@dimen/margin_very_big"
-                android:translationY="-20dp"/>
+                app:layout_constraintVertical_bias="1"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
 
             <include
                 android:layout_height="match_parent"

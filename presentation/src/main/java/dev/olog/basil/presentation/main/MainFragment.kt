@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.math.MathUtils
-import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -23,7 +22,6 @@ import dev.olog.basil.presentation.utils.activityViewModelProvider
 import dev.olog.basil.presentation.utils.subscribe
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView
 import dev.olog.basil.shared.lazyFast
-import dev.olog.basil.shared.statusBarHeight
 import dev.olog.basil.shared.toggleVisibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -52,7 +50,7 @@ class MainFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         titleOnlyList.adapter = recipeTitlesAdapter
-        titleOnlyList.layoutManager = LinearLayoutManager(requireContext())
+        titleOnlyList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         titleOnlyList.requestDisallowInterceptTouchEvent(true)
 
         imageOnlyList.layoutManager = recipeImageLayoutManager
@@ -100,7 +98,7 @@ class MainFragment : BaseFragment() {
     }
 
     private fun adjustDetailBorders() {
-        imageOnlyList.doOnPreDraw {
+        imageOnlyList.setOnApplyWindowInsetsListener { v, insets ->
             val firstVisible = recipeImageLayoutManager.findFirstCompletelyVisibleItemPosition()
             val viewHolder = imageOnlyList.findViewHolderForLayoutPosition(firstVisible)
             viewHolder?.let {
@@ -112,8 +110,10 @@ class MainFragment : BaseFragment() {
                 val layoutParams = scrim.layoutParams as ConstraintLayout.LayoutParams
                 layoutParams.marginStart = marginHorizontal
                 layoutParams.marginEnd = marginHorizontal
-                layoutParams.topMargin = location[1] - resources.statusBarHeight()
+                layoutParams.topMargin = location[1] - insets.systemWindowInsetTop
                 scrim.layoutParams = layoutParams
+
+                insets
             }
         }
     }
@@ -143,7 +143,10 @@ class MainFragment : BaseFragment() {
         private val location = intArrayOf(0, 0)
 
         init {
-            statusBarHeight = resources.statusBarHeight()
+            headerWrapper.setOnApplyWindowInsetsListener { v, insets ->
+                statusBarHeight = insets.systemWindowInsetTop
+                insets
+            }
         }
 
         override fun onPanelStateChanged(panel: View?, previousState: SlidingUpPanelLayout.PanelState?, newState: SlidingUpPanelLayout.PanelState?) {
@@ -160,7 +163,6 @@ class MainFragment : BaseFragment() {
             arrow.alpha = MathUtils.clamp(1 - slideOffset * 3f, 0f, 1f)
 
             divider.alpha = slideOffset
-            midWrapper.alpha = slideOffset
             bottomWrapper.alpha = slideOffset
             description.alpha = slideOffset
 
