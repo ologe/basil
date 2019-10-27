@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        android:name=".app.App">
+        android:name=".App">
 
         <activity android:name=".presentation.main.MainActivity"
             android:windowSoftInputMode="adjustPan"

@@ -1,1 +1,1 @@
-include ':app', ':core', ':shared', ':data', ':presentation', ':data-local', ':data-remote', ':injection'
+include ':app', ':core', ':shared', ':data', ':presentation', ':data-local', ':data-remote'

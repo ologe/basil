@@ -1,38 +1,22 @@
 package dev.olog.basil.presentation.main.di
 
-import dagger.BindsInstance
-import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dev.olog.basil.injection.CoreComponent
+import dagger.Subcomponent
+import dagger.android.AndroidInjector
 import dev.olog.basil.presentation.ViewModelModule
 import dev.olog.basil.presentation.main.MainActivity
 import dev.olog.basil.shared.dagger.scope.PerActivity
 
-
-internal fun MainActivity.inject() {
-    DaggerMainActivityComponent.factory()
-        .create(this, CoreComponent.coreComponent(application))
-        .inject(this)
-}
-
-@Component(
+@Subcomponent(
     modules = [
-        AndroidInjectionModule::class,
         ViewModelModule::class,
-        AndroidBindingsModule::class,
-        MainActivityModule::class
-    ],
-    dependencies = [CoreComponent::class]
+        MainActivityModule::class,
+        AndroidBindingsModule::class
+    ]
 )
 @PerActivity
-internal interface MainActivityComponent {
+interface MainActivityComponent : AndroidInjector<MainActivity> {
 
-    fun inject(instance: MainActivity)
-
-    @Component.Factory
-    interface Factory {
-
-        fun create(@BindsInstance instance: MainActivity, component: CoreComponent): MainActivityComponent
-    }
+    @Subcomponent.Factory
+    interface Factory : AndroidInjector.Factory<MainActivity>
 
 }

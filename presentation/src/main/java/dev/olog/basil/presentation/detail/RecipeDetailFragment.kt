@@ -52,7 +52,7 @@ class RecipeDetailFragment : BottomSheetDialogFragment() {
         tabMediator.detach()
     }
 
-    private val tabMediatorCallback = TabLayoutMediator.OnConfigureTabCallback { _, position ->
+    private val tabMediatorCallback = TabLayoutMediator.TabConfigurationStrategy { _, position ->
         when (position) {
             0 -> "Ingredients"
             1 -> "Directions"

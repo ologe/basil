@@ -7,7 +7,6 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation project(':core')
     implementation project(':shared')
-    implementation project(':injection')
 
     implementation lib_x.appcompat
     implementation lib_x.material
