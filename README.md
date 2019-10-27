@@ -1,6 +1,6 @@
 # Basil
 
-UI based on Google Material Design 2 [Basil] (https://material.io/design/material-studies/basil.html)
+UI based on Google Material Design 2 [Basil](https://material.io/design/material-studies/basil.html)
 
 ### Build
 
