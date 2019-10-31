@@ -13,6 +13,6 @@ class App : DaggerApplication() {
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerCoreComponent.factory().create(this)
+        return DaggerAppComponent.factory().create(this)
     }
 }
