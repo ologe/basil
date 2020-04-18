@@ -24,8 +24,6 @@ android {
     }
 }
 
-apply from: '../kapt.gradle'
-
 dependencies {
     implementation project(':core')
     implementation project(':shared')
