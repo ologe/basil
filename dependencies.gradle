@@ -1,35 +1,34 @@
 ext {
 //    core
-    coroutines = '1.3.2'
-    dagger = '2.25.2'
+    coroutines = '1.3.5'
+    dagger = '2.27'
 
 //    android x
-    android_x_core = '1.1.0'
+    android_x_core = '1.2.0'
     android_x_appcompat = '1.1.0'
-    android_x_recycler = '1.1.0-beta05'
-    android_x_material = '1.1.0-beta01'
+    android_x_recycler = '1.1.0'
+    android_x_material = '1.2.0-alpha06'
     android_x_preference = '1.1.0'
     android_x_palette = '1.0.0'
     android_x_annotations = '1.1.0'
-    android_x_coordinator = '1.1.0-rc01'
-    android_x_fragments = '1.1.0'
-    constraint_layout = '2.0.0-beta3'
-    lifecycle = '2.1.0'
+    android_x_coordinator = '1.1.0'
+    android_x_fragments = '1.2.4'
+    constraint_layout = '2.0.0-beta4'
+    lifecycle = '2.2.0'
 
 //    ui
-    glide = '4.10.0'
+    glide = '4.11.0'
 
 //    data
-    room = '2.2.0'
-    sql_content_resolver = '1.2.1'
+    room = '2.2.5'
 
 //    network
-    ok_http = '4.1.0'
-    retrofit = '2.6.1'
-    gson = '2.8.5'
+    ok_http = '4.5.0'
+    retrofit = '2.8.1'
+    gson = '2.8.6'
 
 //    debug
-    leak_canary = '2.0-beta-3'
+    leak_canary = '2.2'
     stetho = '1.5.1'
 
     lib_core = [
@@ -70,7 +69,6 @@ ext {
     ]
 
     lib_data = [
-            sql_content_resolver: "com.github.ologe:android-content-resolver-SQL:$sql_content_resolver",
             room                : "androidx.room:room-runtime:$room",
             room_ktx            : "androidx.room:room-ktx:$room",
             room_processor      : "androidx.room:room-compiler:$room",

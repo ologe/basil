@@ -29,6 +29,26 @@ allprojects {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
+
+}
+
+subprojects {
+    def androidPlugins = [
+            "com.android.build.gradle.AppPlugin",
+            "com.android.build.gradle.LibraryPlugin"
+    ]
+
+    project.plugins.whenPluginAdded { plugin ->
+        if (plugin.class.name in androidPlugins) {
+            // setup common options
+            project.android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
