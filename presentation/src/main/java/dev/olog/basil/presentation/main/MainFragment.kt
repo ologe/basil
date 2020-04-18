@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.math.MathUtils
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -22,7 +23,6 @@ import dev.olog.basil.presentation.utils.activityViewModelProvider
 import dev.olog.basil.presentation.utils.subscribe
 import dev.olog.basil.presentation.widget.ParallaxScrimImageView
 import dev.olog.basil.shared.lazyFast
-import dev.olog.basil.shared.toggleVisibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -92,8 +92,8 @@ class MainFragment : BaseFragment() {
     private fun updateCurrentRecipe(recipe: Recipe?) {
         if (recipe != null) {
             description.text = recipe.description
-            glutenFree.toggleVisibility(recipe.allergens.glutenFree)
-            eggFree.toggleVisibility(recipe.allergens.dairyFree)
+            glutenFree.isVisible = recipe.allergens.glutenFree
+            eggFree.isVisible = recipe.allergens.dairyFree
         }
     }
 

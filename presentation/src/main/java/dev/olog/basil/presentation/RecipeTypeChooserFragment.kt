@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import dev.olog.basil.core.RecipeCategory
 import dev.olog.basil.presentation.base.BaseFragment
@@ -11,7 +12,6 @@ import dev.olog.basil.presentation.main.MainFragmentViewModel
 import dev.olog.basil.presentation.utils.activityViewModelProvider
 import dev.olog.basil.presentation.utils.subscribe
 import dev.olog.basil.shared.lazyFast
-import dev.olog.basil.shared.toggleVisibility
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recipe_type_chooser.*
 import kotlinx.android.synthetic.main.fragment_recipe_type_chooser.view.*
@@ -68,7 +68,7 @@ class RecipeTypeChooserFragment : BaseFragment() {
 
         for ((key, value) in categories.entries) {
             value.setTypeface(baseTypeFace, if (key == category) Typeface.BOLD else Typeface.NORMAL)
-            categoriesUnderline[key]?.toggleVisibility(key == category)
+            categoriesUnderline[key]?.isVisible = key == category
         }
         // scroll to recipes
         requireActivity().pager.currentItem = 1
