@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.core.view.doOnLayout
 import dev.olog.basil.presentation.R
 import kotlinx.android.synthetic.main.item_text.view.*
+import kotlin.math.abs
 
 class TextSwitcher(
     context: Context,
@@ -42,7 +43,7 @@ class TextSwitcher(
     fun translateOffset(translation: Float) {
         translateTo(translation)
 
-        if (translation == 0f) {
+        if (abs(translation) < 0.1) {
             resetText()
         }
     }
