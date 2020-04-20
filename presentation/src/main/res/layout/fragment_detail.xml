@@ -40,20 +40,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <dev.olog.basil.presentation.widget.ParallaxTextView
-        android:id="@+id/title"
-        android:text="Creamy Pesto Pasta"
+    <dev.olog.basil.presentation.widget.TextSwitcher
+        android:id="@+id/textSwitcher"
         app:layout_constraintTop_toTopOf="@+id/scrim"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/scrim"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        style="@style/RecipeHeader"
-        app:autoSizeMinTextSize="40dp"
-        android:maxLines="2" />
+        android:layout_height="200dp" />
 
     <View
         android:id="@+id/divider"
@@ -61,7 +55,7 @@
         android:layout_height="1.5dp"
         app:layout_constraintStart_toStartOf="@+id/scrim"
         app:layout_constraintEnd_toEndOf="@+id/scrim"
-        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintBottom_toBottomOf="@+id/textSwitcher"
         android:layout_marginTop="@dimen/margin_big"
         android:alpha="0"
         tools:alpha="1"

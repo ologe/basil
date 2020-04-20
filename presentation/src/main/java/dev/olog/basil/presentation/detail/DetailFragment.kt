@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_pager.*
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 import kotlin.math.abs
@@ -30,6 +31,11 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.observeRecipes()
+            .map { it.map { it.name } }
+            .onEach { textSwitcher.updateTexts(it) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.observeCurrentRecipe()
             .onEach { updateData(it) }
@@ -50,7 +56,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     }
 
     private fun updateData(recipe: Recipe?) {
-        title.isVisible = recipe != null
+        textSwitcher.isVisible = recipe != null
         arrow.isVisible = recipe != null
         recipe ?: return
 
@@ -62,24 +68,41 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     private val pagerCallback = object : ViewPager2.OnPageChangeCallback() {
 
         private var lastPage = 0
+        private var isSettling = false
 
+        // fricking view pager callback
         override fun onPageScrolled(
             position: Int,
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
+            if (positionOffset == 0f) {
+                textSwitcher.translateOffset(0f)
+                return
+            }
             if (position != lastPage) {
                 // left
-                title.translationX = title.width.toFloat() * (1 - positionOffset)
+                if (isSettling) {
+                    textSwitcher.translateOffset(positionOffset)
+                } else {
+                    textSwitcher.translateOffset(-(1 - positionOffset))
+                }
             } else {
                 // right
-                title.translationX = -title.width.toFloat() * positionOffset
+                if (isSettling) {
+                    textSwitcher.translateOffset(-(1 - positionOffset))
+                } else {
+                    textSwitcher.translateOffset(positionOffset)
+                }
             }
-            println(title.translationX)
+        }
 
+        override fun onPageScrollStateChanged(state: Int) {
+            isSettling = state == ViewPager2.SCROLL_STATE_SETTLING
         }
 
         override fun onPageSelected(position: Int) {
+            textSwitcher.updateCurrentPage(position)
             lastPage = position
         }
 

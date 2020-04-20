@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <dev.olog.basil.presentation.widget.ParallaxTextView
+        android:id="@+id/title"
+        style="@style/RecipeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:maxLines="2"
+        tools:text="Creamy Pesto Pasta"
+        android:textAlignment="center"
+        app:autoSizeMinTextSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrim" />
+
+</FrameLayout>
