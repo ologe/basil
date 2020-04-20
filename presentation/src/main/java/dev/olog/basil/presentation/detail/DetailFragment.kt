@@ -112,7 +112,7 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
         private val contentAlphaThreshold = 0.6f
         private val titleAlphaAcceleration = 10
-        private val contentAlphaAcceleration = 4
+        private val contentAlphaAcceleration = 3
 
         override fun onOffsetChanged(view: SlidingSheet, offset: Float) {
             clickTheft.isClickable = offset < 0f
