@@ -1,3 +1,8 @@
 apply plugin: 'com.android.library'
 apply from: '../base_module.gradle'
+apply plugin: 'kotlin-android-extensions'
+
+androidExtensions {
+    experimental = true
+}
 

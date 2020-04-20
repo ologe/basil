@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.RecyclerView
+import dev.olog.basil.presentation.model.BaseModel
 
 abstract class BaseAdapter<T : BaseModel>
     : RecyclerView.Adapter<DataBoundViewHolder>() {

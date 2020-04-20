@@ -3,14 +3,13 @@ apply from: '../base_module.gradle'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-
 dependencies {
     implementation project(':core')
     implementation project(':shared')
 
     implementation lib_x.appcompat
     implementation lib_x.material
-    implementation lib_x.core_ktx
+    implementation lib_x.core
     implementation lib_x.constraint_layout
     implementation lib_x.coordinator
     implementation lib_x.fragments
@@ -27,6 +26,5 @@ dependencies {
     kapt lib_core.dagger_android_processor
 
     implementation lib_ui.glide
-    implementation 'com.sothree.slidinguppanel:library:3.4.0'
 
 }

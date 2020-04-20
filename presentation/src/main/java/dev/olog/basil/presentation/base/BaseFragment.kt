@@ -1,30 +1,12 @@
 package dev.olog.basil.presentation.base
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
-import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import dagger.android.support.DaggerFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 
-abstract class BaseFragment : DaggerFragment(), CoroutineScope by MainScope() {
+abstract class BaseFragment(
+    @LayoutRes private val layoutRes: Int
+) : DaggerFragment(layoutRes) {
 
-    @CallSuper
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(provideLayoutId(), container, false)
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        cancel()
-    }
-
-    @LayoutRes
-    protected abstract fun provideLayoutId(): Int
 
 }

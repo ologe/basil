@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SlidingSheet">
+        <attr name="top_offset" format="dimension"/>
+        <attr name="bottom_offset" format="dimension"/>
+    </declare-styleable>
+
+</resources>

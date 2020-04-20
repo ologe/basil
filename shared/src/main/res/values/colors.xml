@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">@color/basil_orange</color>
 
-    <color name="background">#FFFBE6</color>
+    <color name="background">#fffbea</color>
     <color name="transparent_background">#DDFFFBE6</color>
 
     <color name="status_bar_color">#ECE9d5</color>
@@ -14,5 +14,6 @@
     <color name="basil_green_500">#37966F</color>
     <color name="basil_green_100">#B9E4C9</color>
     <color name="basil_green_50">#F1f5df</color>
+    <color name="basil_scrim">#e8eede</color>
 
 </resources>

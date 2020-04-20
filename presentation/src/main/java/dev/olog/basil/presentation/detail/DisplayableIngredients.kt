@@ -1,6 +1,6 @@
 package dev.olog.basil.presentation.detail
 
-import dev.olog.basil.presentation.base.BaseModel
+import dev.olog.basil.presentation.model.BaseModel
 
 data class DisplayableIngredients(
     override val id: Int,

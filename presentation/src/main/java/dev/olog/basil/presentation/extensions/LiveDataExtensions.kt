@@ -1,4 +1,4 @@
-package dev.olog.basil.presentation.utils
+package dev.olog.basil.presentation.extensions
 
 import androidx.lifecycle.*
 

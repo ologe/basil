@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+<!--    TODO change bottom offset dynamically ??-->
+    <dev.olog.basil.presentation.widget.sliding.sheet.SlidingSheet
+        android:id="@+id/slidingSheet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:top_offset="@dimen/top_offset"
+        app:bottom_offset="@dimen/bottom_offset">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_drawer"
+            android:name="dev.olog.basil.presentation.drawer.DrawerFragment"
+            android:tag="dev.olog.basil.presentation.drawer.DrawerFragment"/>
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="dev.olog.basil.presentation.main.MainFragment"
+            android:name="dev.olog.basil.presentation.pager.PagerFragment"
+            tools:layout="@layout/fragment_recipe"/>
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="dev.olog.basil.presentation.detail.DetailFragment"
+            android:tag="dev.olog.basil.presentation.detail.DetailFragment"
+            tools:layout="@layout/fragment_detail" />
+
+    </dev.olog.basil.presentation.widget.sliding.sheet.SlidingSheet>
 
 </FrameLayout>

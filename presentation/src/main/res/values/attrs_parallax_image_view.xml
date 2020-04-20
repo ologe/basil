@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ParallaxImageView">
+        <attr name="vertical_parallax" format="integer"/>
+        <attr name="horizontal_parallax" format="integer"/>
+        <attr name="scrim_color" format="reference|color"/>
+        <attr name="scrim_percentage" format="float"/>
+    </declare-styleable>
+
+</resources>

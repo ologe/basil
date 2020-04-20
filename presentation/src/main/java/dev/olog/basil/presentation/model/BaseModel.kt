@@ -1,4 +1,4 @@
-package dev.olog.basil.presentation.base
+package dev.olog.basil.presentation.model
 
 interface BaseModel {
     val type: Int

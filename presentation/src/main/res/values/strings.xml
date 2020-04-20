@@ -29,4 +29,10 @@
     <string name="need_recipe_people">Provide first number of people</string>
     <string name="need_recipe_ingredient">Provide at least one ingredient</string>
     <string name="need_recipe_image">Provide an image</string>
+
+    <string name="category_appetizers">Appetizers</string>
+    <string name="category_entrees">Entrées</string>
+    <string name="category_desserts">Desserts</string>
+    <string name="category_cocktails">Cocktails</string>
+
 </resources>
