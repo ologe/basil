@@ -17,6 +17,7 @@ import dev.olog.basil.shared.lazyFast
 import dev.olog.basil.shared.throwNotHandled
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
+// TODO not sure why sliding sheet is stealing touches
 class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
 
     companion object {

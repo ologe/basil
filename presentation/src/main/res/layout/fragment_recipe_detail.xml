@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/transparent_background"
     android:clickable="true"
-    android:focusable="true"
-    android:elevation="20dp">
+    android:focusable="true">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -18,7 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/background"
-        app:tabIndicatorFullWidth="false">
+        app:tabIndicatorFullWidth="false"
+        android:clickable="true"
+        android:focusable="true">
 
         <com.google.android.material.tabs.TabItem
             android:text="Ingredients"
@@ -39,6 +40,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tabs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:clickable="true"
+        android:focusable="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
