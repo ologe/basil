@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <dev.olog.basil.presentation.widget.ParallaxTextView
+    <TextView
         android:id="@+id/title"
         style="@style/RecipeHeader"
         android:layout_width="match_parent"

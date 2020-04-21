@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -14,13 +15,19 @@ import dev.olog.basil.presentation.detail.adapter.RecipeDetailAdapter
 import dev.olog.basil.shared.exhaustive
 import dev.olog.basil.shared.throwNotHandled
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
-import kotlinx.android.synthetic.main.fragment_recipe_detail.view.*
 
 class RecipeDetailFragment : BottomSheetDialogFragment() {
 
     companion object {
-        fun show(activity: FragmentActivity) {
-            RecipeDetailFragment().show(activity.supportFragmentManager, "RecipeDetailFragment")
+        private const val TAG = "RecipeDetailFragment"
+        private const val INITIAL_PAGE = "initial.page"
+
+        fun show(activity: FragmentActivity, initialPage: Int) {
+            RecipeDetailFragment()
+                .apply {
+                    arguments = bundleOf(INITIAL_PAGE to initialPage)
+                }
+                .show(activity.supportFragmentManager, TAG)
         }
     }
 
@@ -39,7 +46,8 @@ class RecipeDetailFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.pager.adapter = RecipeDetailAdapter(this)
+        pager.adapter = RecipeDetailAdapter(this)
+        pager.currentItem = requireArguments().getInt(INITIAL_PAGE, 0)
     }
 
     override fun onResume() {

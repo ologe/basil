@@ -47,12 +47,20 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
         super.onResume()
         requireActivity().slidingSheet.addListener(listener)
         requireActivity().pager.registerOnPageChangeCallback(pagerCallback)
+        requireActivity().ingredients.setOnClickListener {
+            RecipeDetailFragment.show(requireActivity(), 0)
+        }
+        requireActivity().directions.setOnClickListener {
+            RecipeDetailFragment.show(requireActivity(), 1)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         requireActivity().slidingSheet.removeListener(listener)
         requireActivity().pager.unregisterOnPageChangeCallback(pagerCallback)
+        requireActivity().ingredients.setOnClickListener(null)
+        requireActivity().directions.setOnClickListener(null)
     }
 
     private fun updateData(recipe: Recipe?) {
