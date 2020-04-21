@@ -61,6 +61,9 @@ class TextSwitcher(
     }
 
     private fun resetText() {
+        if (texts.isEmpty()) {
+            return
+        }
         if (currentPosition - 1 >= 0) {
             getChildAt(0).title.text = texts[currentPosition - 1]
         }

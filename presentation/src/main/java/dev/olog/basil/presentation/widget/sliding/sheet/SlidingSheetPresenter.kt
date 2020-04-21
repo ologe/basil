@@ -3,9 +3,7 @@ package dev.olog.basil.presentation.widget.sliding.sheet
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.ViewConfiguration
-import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
-import androidx.core.math.MathUtils
 import androidx.core.math.MathUtils.clamp
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import dev.olog.basil.presentation.widget.sliding.sheet.SlidingSheet.ScrollState
@@ -36,7 +34,7 @@ class SlidingSheetPresenter(
     private var lastMotionX = 0f
     private var lastMotionY = 0f
 
-    private var currentPage = 1
+    private var currentPage = SlidingSheet.DEFAULT_PAGE
     private val configuration = ViewConfiguration.get(view.context)
     private var velocityTracker: VelocityTracker? = null
 
@@ -103,9 +101,9 @@ class SlidingSheetPresenter(
                 else -> currentPage
             }
             val dy = when (currentPage) {
-                0 -> view.height - view.bottomOffset
-                1 -> 0
-                2 -> -view.height
+                SlidingSheet.BOTTOM_PAGE -> view.height - view.bottomOffset
+                SlidingSheet.CENTER_PAGE -> 0
+                SlidingSheet.TOP_PAGE -> -view.height
                 else -> throw IllegalStateException("page $currentPage")
             }
             val deltaScroll = dy - scrollY

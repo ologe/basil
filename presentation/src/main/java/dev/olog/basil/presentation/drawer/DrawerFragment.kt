@@ -28,7 +28,7 @@ class DrawerFragment : BaseFragment(R.layout.fragment_drawer) {
     override fun onResume() {
         super.onResume()
         drawer.listener = {
-//            viewModel.updateVisibleCategory(it) // TODO scroll is dying after pager update
+//            viewModel.updateVisibleCategory(it) TODO scroll dies
         }
         requireActivity().slidingSheet.addListener(listener)
     }
@@ -41,12 +41,20 @@ class DrawerFragment : BaseFragment(R.layout.fragment_drawer) {
 
     private val listener = object : SlidingSheet.Callback {
 
+        private var translate = true
+
         private val acceleration by lazyFast {
             requireContext().dip(128)
         }
 
         override fun onOffsetChanged(view: SlidingSheet, offset: Float) {
-            if (offset < 0) {
+            if (offset == 0f) {
+                translate = true
+            } else if (offset == 1f){
+                translate = false
+            }
+
+            if (offset < 0 || !translate) {
                 return
             }
             val invertedOffset = 1 - offset

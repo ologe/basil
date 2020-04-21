@@ -6,8 +6,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.FrameLayout
+import androidx.core.view.doOnLayout
 import dev.olog.basil.presentation.R
-import dev.olog.basil.presentation.extensions.dip
 import dev.olog.basil.presentation.extensions.dipf
 import dev.olog.basil.presentation.extensions.setHeight
 import kotlin.math.abs
@@ -16,6 +16,15 @@ class SlidingSheet(
     context: Context,
     attrs: AttributeSet
 ) : FrameLayout(context, attrs) {
+
+    companion object {
+
+        const val TOP_PAGE = 2
+        const val CENTER_PAGE = 1
+        const val BOTTOM_PAGE = 0
+        const val DEFAULT_PAGE = CENTER_PAGE
+
+    }
 
     private val listeners = mutableListOf<Callback>()
 
@@ -44,6 +53,14 @@ class SlidingSheet(
         topOffset = a.getDimension(R.styleable.SlidingSheet_top_offset, context.dipf(32)).toInt()
         bottomOffset = a.getDimension(R.styleable.SlidingSheet_bottom_offset, context.dipf(32)).toInt()
         a.recycle()
+
+        doOnLayout {
+            val height = MeasureSpec.getSize(it.height).toFloat()
+
+            topView.setHeight(height.toInt() + topOffset)
+            topView.translationY = -height
+            bottomView.translationY = height - bottomOffset
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -51,16 +68,6 @@ class SlidingSheet(
         if (!isInEditMode) {
             require(childCount == 3)
         }
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
-        val height = MeasureSpec.getSize(heightMeasureSpec).toFloat()
-
-        topView.setHeight(height.toInt() + topOffset)
-        topView.translationY = -height
-        bottomView.translationY = height - bottomOffset
     }
 
     fun addListener(listener: Callback) {
