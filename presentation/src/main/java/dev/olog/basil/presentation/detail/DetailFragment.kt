@@ -3,11 +3,13 @@ package dev.olog.basil.presentation.detail
 import android.os.Bundle
 import android.view.View
 import androidx.core.math.MathUtils.clamp
+import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.transition.MaterialSharedAxis
 import dev.olog.basil.core.Recipe
 import dev.olog.basil.presentation.R
 import dev.olog.basil.presentation.base.BaseFragment
@@ -29,6 +31,14 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
     private val viewModel by activityViewModels<RecipesViewModel> { factory }
 
+    private var currentRecipe: Recipe? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialSharedAxis.create(MaterialSharedAxis.Z, false)
+        reenterTransition = MaterialSharedAxis.create(MaterialSharedAxis.Z, true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,10 +58,10 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
         requireActivity().slidingSheet.addListener(listener)
         requireActivity().pager.registerOnPageChangeCallback(pagerCallback)
         requireActivity().ingredients.setOnClickListener {
-            RecipeDetailFragment.show(requireActivity(), 0)
+            RecipeDetailFragment.show(requireActivity(), 0, currentRecipe!!)
         }
         requireActivity().directions.setOnClickListener {
-            RecipeDetailFragment.show(requireActivity(), 1)
+            RecipeDetailFragment.show(requireActivity(), 1, currentRecipe!!)
         }
     }
 
@@ -64,11 +74,12 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     }
 
     private fun updateData(recipe: Recipe?) {
+        this.currentRecipe = recipe
         textSwitcher.isVisible = recipe != null
         arrow.isVisible = recipe != null
         recipe ?: return
 
-        description.text = recipe.description.take(recipe.description.indexOf(".") + 1)
+        description.text = recipe.description.take(recipe.description.indexOf(".") + 1).parseAsHtml()
         glutenFree.isVisible = recipe.allergens.glutenFree
         eggFree.isVisible = recipe.allergens.dairyFree
     }

@@ -16,8 +16,6 @@ class BasilGroup(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        val p = parent
-        require(p is ConstraintLayout)
         if (!isInEditMode) {
             alpha = 0f
         }
@@ -31,6 +29,9 @@ class BasilGroup(
     }
 
     private fun getViews(): Collection<View> {
+        if (parent !is ConstraintLayout) {
+            return emptyList()
+        }
         referencedIds.forEach {
             views.getOrPut(it) { (parent as ConstraintLayout).findViewById<View>(it) }
         }

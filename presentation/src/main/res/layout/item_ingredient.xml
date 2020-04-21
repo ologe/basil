@@ -5,16 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_mid">
-
-    <ImageButton
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/wrapped_add_big"
-        android:background="@null" />
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingStart="@dimen/margin_mid"
+    android:paddingEnd="@dimen/margin_mid">
 
     <TextView
         android:id="@+id/ingredient"
@@ -22,14 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon"
-        app:layout_constraintBottom_toBottomOf="@+id/icon"
-        android:layout_marginStart="@dimen/margin_mid"
-        style="@style/Ingredient"/>
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Ingredient"
+        android:drawableStart="@drawable/wrapped_add_big"
+        android:drawablePadding="24dp"/>
 
     <TextView
         android:id="@+id/quantity"
-        tools:text="6"
+        tools:text="6 cups"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/ingredient"
@@ -43,9 +37,9 @@
         app:layout_constraintStart_toEndOf="@id/ingredient"
         app:layout_constraintEnd_toStartOf="@id/quantity"
         app:layout_constraintBottom_toBottomOf="@+id/ingredient"
-        android:layout_marginStart="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
-        android:translationY="-8dp"
-        android:scaleY="1.5" />
+        android:translationY="-9dp"
+        android:layout_marginStart="4dp"
+        android:scaleY="2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
