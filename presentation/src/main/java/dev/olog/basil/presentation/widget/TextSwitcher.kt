@@ -43,6 +43,7 @@ class TextSwitcher(
     fun translateOffset(translation: Float) {
         translateTo(translation)
 
+        // TODO still bugged when returns to current page
         if (abs(translation) < 0.1) {
             resetText()
         }
