@@ -97,7 +97,7 @@
     </style>
 
     <style name="Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
     </style>

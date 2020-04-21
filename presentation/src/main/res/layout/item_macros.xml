@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text"
+        android:text="Calories"
+        style="@style/Subtitle1"
+        android:textColor="@color/basil_green_500"
+        app:fontFamily="@font/lekton"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:text="465g"
+        style="@style/Subtitle1"
+        android:textColor="@color/basil_green_800"
+        app:fontFamily="@font/lekton_bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</merge>

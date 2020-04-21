@@ -18,7 +18,9 @@ class BasilGroup(
         super.onAttachedToWindow()
         val p = parent
         require(p is ConstraintLayout)
-        alpha = 0f
+        if (!isInEditMode) {
+            alpha = 0f
+        }
     }
 
     override fun setAlpha(alpha: Float) {

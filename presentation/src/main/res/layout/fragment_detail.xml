@@ -14,6 +14,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"/>
 
+    <dev.olog.basil.presentation.widget.BasilGroup
+        android:id="@+id/fadeItems"
+        app:constraint_referenced_ids="description, divider, allergens, macros, macrosDivider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 <!--    here just to keep proportions-->
     <View
         android:id="@+id/scrim"
@@ -30,15 +39,6 @@
         android:layout_marginEnd="@dimen/recipe_margin"
         android:visibility="invisible"
         tools:visibility="visible"/>
-
-    <dev.olog.basil.presentation.widget.BasilGroup
-        android:id="@+id/fadeItems"
-        app:constraint_referenced_ids="description, divider, allergens"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <dev.olog.basil.presentation.widget.TextSwitcher
         android:id="@+id/textSwitcher"
@@ -97,10 +97,69 @@
         android:gravity="center"
         android:ellipsize="end"/>
 
+    <LinearLayout
+        android:id="@+id/macros"
+        app:layout_constraintTop_toBottomOf="@+id/scrim"
+        app:layout_constraintStart_toStartOf="@id/scrim"
+        app:layout_constraintEnd_toEndOf="@id/scrim"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal">
+
+        <dev.olog.basil.presentation.widget.MacroView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:macro_name="Calories"
+            app:macro_amount="465"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            style="@style/Divider"
+            android:background="@color/basil_green_100"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <dev.olog.basil.presentation.widget.MacroView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:macro_name="Protein"
+            app:macro_amount="27"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            style="@style/Divider"
+            android:background="@color/basil_green_100"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <dev.olog.basil.presentation.widget.MacroView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:macro_name="Fat"
+            app:macro_amount="12"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/macrosDivider"
+        android:layout_width="0dp"
+        android:layout_height="1.5dp"
+        app:layout_constraintStart_toStartOf="@+id/scrim"
+        app:layout_constraintEnd_toEndOf="@+id/scrim"
+        app:layout_constraintTop_toBottomOf="@+id/macros"
+        android:alpha="0"
+        tools:alpha="1"
+        style="@style/Divider" />
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/allergens"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:layout_constraintBottom_toTopOf="@+id/bottomWrapper"
+        app:layout_constraintTop_toBottomOf="@+id/macros"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
@@ -127,7 +186,6 @@
             tools:visibility="visible"/>
 
     </com.google.android.material.chip.ChipGroup>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomWrapper"
@@ -168,6 +226,7 @@
             android:layout_height="56dp"
             android:text="Directions"
             android:gravity="center"
+            android:letterSpacing="0.01"
             android:textColor="@color/basil_green_800"
             android:textAppearance="@style/Button" />
 

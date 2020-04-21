@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MacroView">
+        <attr name="macro_name" format="reference|string"/>
+        <attr name="macro_amount" format="integer"/>
+    </declare-styleable>
+
+</resources>
