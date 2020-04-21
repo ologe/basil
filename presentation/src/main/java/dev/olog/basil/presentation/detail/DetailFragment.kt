@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.transition.MaterialSharedAxis
 import dev.olog.basil.core.Recipe
 import dev.olog.basil.presentation.R
 import dev.olog.basil.presentation.base.BaseFragment
@@ -32,12 +31,6 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     private val viewModel by activityViewModels<RecipesViewModel> { factory }
 
     private var currentRecipe: Recipe? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        exitTransition = MaterialSharedAxis.create(MaterialSharedAxis.Z, false)
-        reenterTransition = MaterialSharedAxis.create(MaterialSharedAxis.Z, true)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.google.android.material.tabs.TabLayoutMediator
 import dev.olog.basil.core.Recipe
 import dev.olog.basil.presentation.R
@@ -37,10 +38,11 @@ class RecipeDetailFragment : Fragment(R.layout.fragment_recipe_detail) {
                 )
             }
             fragment.enterTransition = TransitionSet().apply {
+                addTransition(ScaleTransition())
                 addTransition(Slide(Gravity.BOTTOM))
             }
             activity.supportFragmentManager.commit {
-                add(R.id.slidingSheet, fragment, TAG)
+                add(android.R.id.content, fragment, TAG)
                 addToBackStack(TAG)
             }
         }
